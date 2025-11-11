@@ -195,6 +195,10 @@ Number normalization examples:
 
 ### `JToon.encodeJson(String json, EncodeOptions options): String`
 
+### `JToon.encodeXml(String xml): String`
+
+### `JToon.encodeXml(String xml, EncodeOptions options): String`
+
 Converts any Java object or JSON-string to TOON format.
 
 **Parameters:**
@@ -208,6 +212,10 @@ Converts any Java object or JSON-string to TOON format.
 For `encodeJson` overloads:
 
 - `json` – A valid JSON string to be parsed and encoded. Invalid or blank JSON throws `IllegalArgumentException`.
+
+For `encodeXml` overloads:
+
+- `xml` – A valid XML string to be parsed and encoded. Invalid or blank XML throws `IllegalArgumentException`.
 
 **Returns:**
 
@@ -259,6 +267,21 @@ user:
   id: 123
   name: Ada
   tags[2]: reading,gaming
+```
+
+#### Encode XML
+
+```java
+String xml = "<user><name>John</name><age>25</age></user>";
+System.out.println(JToon.encodeXml(xml));
+```
+
+Output:
+
+```
+user:
+  name: John
+  age: 25
 ```
 
 #### Delimiter Options
