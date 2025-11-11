@@ -1,8 +1,7 @@
 package com.felipestanzani.jtoon.normalizer;
 
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import tools.jackson.databind.JsonNode;
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.dataformat.xml.XmlMapper;
 
 /**
  * Normalizes XML strings to Jackson JsonNode representation.
@@ -11,7 +10,6 @@ import tools.jackson.databind.ObjectMapper;
 public final class XmlNormalizer {
 
     private static final XmlMapper XML_MAPPER = XmlMapper.builder().build();
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     private XmlNormalizer() {
         throw new UnsupportedOperationException("Utility class cannot be instantiated");
@@ -34,9 +32,7 @@ public final class XmlNormalizer {
             throw new IllegalArgumentException("Invalid XML");
         }
         try {
-            // Parse XML to old Jackson JsonNode, then convert to tools JsonNode
-            com.fasterxml.jackson.databind.JsonNode oldNode = XML_MAPPER.readTree(xml);
-            return OBJECT_MAPPER.readTree(oldNode.toString());
+            return XML_MAPPER.readTree(xml);
         } catch (Exception e) {
             throw new IllegalArgumentException("Invalid XML", e);
         }
