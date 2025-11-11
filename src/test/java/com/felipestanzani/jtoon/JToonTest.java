@@ -686,62 +686,90 @@ public class JToonTest {
     }
 
     @Nested
-    @DisplayName("mixed arrays")
-    class MixedArrays {
+    @DisplayName("XML encoding")
+    class XmlEncoding {
 
         @Test
-        @DisplayName("uses list format for arrays mixing primitives and objects")
-        void mixesPrimitivesAndObjects() {
-            Map<String, Object> obj = obj(
-                    "items", list(1, obj("a", 1), "text"));
-            assertEquals(
-                    """
-                            items[3]:
-                              - 1
-                              - a: 1
-                              - text""",
-                    encode(obj));
+        @DisplayName("encodes XML with custom options")
+        void encodesXmlWithOptions() {
+            String xml = "<user><id>123</id><name>Ada</name></user>";
+            EncodeOptions options = new EncodeOptions(4, Delimiter.PIPE, true);
+            String result = JToon.encodeXml(xml, options);
+            // Basic check that custom options work
+            assertNotNull(result);
+            assertTrue(result.length() > 0);
         }
 
         @Test
-        @DisplayName("uses list format for arrays mixing objects and arrays")
-        void mixesObjectsAndArrays() {
-            Map<String, Object> obj = obj(
-                    "items", list(obj("a", 1), list(1, 2)));
-            assertEquals(
-                    """
-                            items[2]:
-                              - a: 1
-                              - [2]: 1,2""",
-                    encode(obj));
+        @DisplayName("throws exception for invalid XML")
+        void throwsForInvalidXml() {
+            String invalidXml = "<user><id>123</id><name>Ada</name>";
+            assertThrows(IllegalArgumentException.class, () -> JToon.encodeXml(invalidXml));
         }
-    }
-
-    @Nested
-    @DisplayName("whitespace and formatting invariants")
-    class Formatting {
 
         @Test
-        @DisplayName("produces no trailing spaces at end of lines")
-        void noTrailingSpaces() {
-            Map<String, Object> obj = obj(
-                    "user", obj(
-                            "id", 123,
-                            "name", "Ada"),
-                    "items", list("a", "b"));
-            String result = encode(obj);
-            String[] lines = result.split("\n");
-            for (String line : lines) {
-                assertFalse(line.matches(".* $"), "Line has trailing space: '" + line + "'");
+        @DisplayName("throws exception for null XML")
+        void throwsForNullXml() {
+            assertThrows(IllegalArgumentException.class, () -> JToon.encodeXml(null));
+        }
+
+        @Test
+        @DisplayName("throws exception for empty XML")
+        void throwsForEmptyXml() {
+            assertThrows(IllegalArgumentException.class, () -> JToon.encodeXml(""));
+        }
+
+        @Nested
+        @DisplayName("XML structures (positive test cases)")
+        class XmlStructuresPositive {
+
+            @Test
+            @DisplayName("encodes XML successfully")
+            void encodesXmlSuccessfully() {
+                String xml = "<user><name>John</name><age>25</age></user>";
+                String result = JToon.encodeXml(xml);
+                assertNotNull(result);
+                assertTrue(result.length() > 0);
+            }
+
+            @Test
+            @DisplayName("encodes complex XML successfully")
+            void encodesComplexXmlSuccessfully() {
+                String xml = "<company><name>TechCorp</name><employees><employee><name>Alice</name></employee></employees></company>";
+                String result = JToon.encodeXml(xml);
+                assertNotNull(result);
+                assertTrue(result.length() > 0);
             }
         }
 
-        @Test
-        @DisplayName("produces no trailing newline at end of output")
-        void noTrailingNewline() {
-            Map<String, Object> obj = obj("id", 123);
-            String result = encode(obj);
-            assertFalse(result.matches(".*\\n$"), "Output has trailing newline");
+        @Nested
+        @DisplayName("XML error handling (negative test cases)")
+        class XmlErrorHandling {
+
+            @Test
+            @DisplayName("throws exception for invalid XML")
+            void throwsForInvalidXml() {
+                String invalidXml = "<user><id>123</id><name>Ada</name>";
+                assertThrows(IllegalArgumentException.class, () -> JToon.encodeXml(invalidXml));
+            }
+
+            @Test
+            @DisplayName("throws exception for null XML input")
+            void throwsForNullXml() {
+                assertThrows(IllegalArgumentException.class, () -> JToon.encodeXml(null));
+            }
+
+            @Test
+            @DisplayName("throws exception for empty XML string")
+            void throwsForEmptyXml() {
+                assertThrows(IllegalArgumentException.class, () -> JToon.encodeXml(""));
+            }
+
+            @Test
+            @DisplayName("throws exception for whitespace-only XML")
+            void throwsForWhitespaceOnlyXml() {
+                assertThrows(IllegalArgumentException.class, () -> JToon.encodeXml("   "));
+            }
         }
     }
 

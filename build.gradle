@@ -13,13 +13,16 @@ apply from: 'gradle/publishing.gradle'
 apply from: 'gradle/verification.gradle'
 
 java {
-    // Only enforce toolchain in CI to ensure consistent Java 17 builds
-    // Locally, use whatever JDK is installed
-    if (System.getenv('CI') == 'true') {
-        toolchain {
-            languageVersion = JavaLanguageVersion.of(17)
-        }
+    // Enforce a Java toolchain for consistent builds. Upgrading to the latest LTS (Java 21).
+    // You can override locally by setting a different JDK or removing the toolchain block.
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
     }
+
+    // Set source/target compatibility to Java 21
+    sourceCompatibility = '21'
+    targetCompatibility = '21'
+
     withSourcesJar()
     withJavadocJar()
 }
@@ -31,6 +34,7 @@ repositories {
 dependencies {
     implementation 'tools.jackson.core:jackson-databind:3.0.2'
     implementation 'tools.jackson.module:jackson-module-afterburner:3.0.2'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.18.2'
     testImplementation platform('org.junit:junit-bom:6.0.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
