@@ -686,8 +686,68 @@ public class JToonTest {
     }
 
     @Nested
-    @DisplayName("XML encoding")
-    class XmlEncoding {
+    @DisplayName("mixed arrays")
+    class MixedArrays {
+
+        @Test
+        @DisplayName("uses list format for arrays mixing primitives and objects")
+        void mixesPrimitivesAndObjects() {
+            Map<String, Object> obj = obj(
+                    "items", list(1, obj("a", 1), "text"));
+            assertEquals(
+                    """
+                            items[3]:
+                              - 1
+                              - a: 1
+                              - text""",
+                    encode(obj));
+        }
+
+        @Test
+        @DisplayName("uses list format for arrays mixing objects and arrays")
+        void mixesObjectsAndArrays() {
+            Map<String, Object> obj = obj(
+                    "items", list(obj("a", 1), list(1, 2)));
+            assertEquals(
+                    """
+                            items[2]:
+                              - a: 1
+                              - [2]: 1,2""",
+                    encode(obj));
+        }
+    }
+
+    @Nested
+    @DisplayName("whitespace and formatting invariants")
+    class Formatting {
+
+        @Test
+        @DisplayName("produces no trailing spaces at end of lines")
+        void noTrailingSpaces() {
+            Map<String, Object> obj = obj(
+                    "user", obj(
+                            "id", 123,
+                            "name", "Ada"),
+                    "items", list("a", "b"));
+            String result = encode(obj);
+            String[] lines = result.split("\n");
+            for (String line : lines) {
+                assertFalse(line.matches(".* $"), "Line has trailing space: '" + line + "'");
+            }
+        }
+
+        @Test
+        @DisplayName("produces no trailing newline at end of output")
+        void noTrailingNewline() {
+            Map<String, Object> obj = obj("id", 123);
+            String result = encode(obj);
+            assertFalse(result.matches(".*\\n$"), "Output has trailing newline");
+        }
+    }
+
+    @Nested
+    @DisplayName("XML tests")
+    class XmlTests {
 
         @Test
         @DisplayName("encodes XML with custom options")
