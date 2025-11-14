@@ -757,9 +757,7 @@ public class JToonTest {
             String xml = "<user><id>123</id><name>Ada</name></user>";
             EncodeOptions options = new EncodeOptions(4, Delimiter.PIPE, true);
             String result = JToon.encodeXml(xml, options);
-            // Basic check that custom options work
-            assertNotNull(result);
-            assertTrue(result.length() > 0);
+lid            assertEquals("id: \"123\"\nname: Ada", result);
         }
 
         @Test
@@ -790,8 +788,7 @@ public class JToonTest {
             void encodesXmlSuccessfully() {
                 String xml = "<user><name>John</name><age>25</age></user>";
                 String result = JToon.encodeXml(xml);
-                assertNotNull(result);
-                assertTrue(result.length() > 0);
+                assertEquals("name: John\nage: \"25\"", result);
             }
 
             @Test
@@ -799,8 +796,32 @@ public class JToonTest {
             void encodesComplexXmlSuccessfully() {
                 String xml = "<company><name>TechCorp</name><employees><employee><name>Alice</name></employee></employees></company>";
                 String result = JToon.encodeXml(xml);
-                assertNotNull(result);
-                assertTrue(result.length() > 0);
+                assertEquals("name: TechCorp\nemployees:\n  employee:\n    name: Alice", result);
+            }
+
+            @Test
+            @DisplayName("encodes XML with attributes")
+            void encodesXmlWithAttributes() {
+                String xml = "<user id=\"123\" active=\"true\"><name>John</name><email>john@example.com</email></user>";
+                String result = JToon.encodeXml(xml);
+                assertEquals("id: \"123\"\nactive: \"true\"\nname: John\nemail: john@example.com", result);
+            }
+
+            @Test
+            @DisplayName("encodes deeply nested XML with arrays")
+            void encodesDeeplyNestedXmlWithArrays() {
+                String xml = "<company><name>TechCorp</name><departments><department><name>Engineering</name><employees><employee><name>Alice</name><role>Developer</role></employee><employee><name>Bob</name><role>Manager</role></employee></employees></department><department><name>Marketing</name><employees><employee><name>Carol</name><role>Director</role></employee></employees></department></departments></company>";
+                String result = JToon.encodeXml(xml);
+                assertEquals("name: TechCorp\ndepartments:\n  department[2]:\n    - name: Engineering\n      employees:\n        employee[2]{name,role}:\n          Alice,Developer\n          Bob,Manager\n    - name: Marketing\n      employees:\n        employee:\n          name: Carol\n          role: Director", result);
+            }
+
+            @Test
+            @DisplayName("encodes XML with mixed content and attributes")
+            void encodesXmlWithMixedContentAndAttributes() {
+                String xml = "<book isbn=\"978-3-16-148410-0\" category=\"fiction\"><title>The Great Novel</title><author status=\"bestselling\">Jane Doe</author><chapters><chapter number=\"1\" title=\"Introduction\">Welcome to the story</chapter><chapter number=\"2\" title=\"Development\">The plot thickens</chapter></chapters></book>";
+                String result = JToon.encodeXml(xml);
+                String expected = "isbn: 978-3-16-148410-0\ncategory: fiction\ntitle: The Great Novel\nauthor:\n  status: bestselling\n  \"\": Jane Doe\nchapters:\n  chapter[2]{number,title,\"\"}:\n    \"1\",Introduction,Welcome to the story\n    \"2\",Development,The plot thickens";
+                assertEquals(expected, result);
             }
         }
 
