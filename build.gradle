@@ -5,7 +5,7 @@ plugins {
     id 'jacoco'
 }
 
-group = 'com.felipestanzani'
+group = 'dev.toonformat'
 version = providers.gradleProperty('version').getOrElse('0.1.2')
 description = 'Token-Oriented Object Notation (TOON) - A compact, human-readable format for LLM contexts'
 
@@ -64,7 +64,7 @@ jacocoTestCoverageVerification {
             limit {
                 counter = "LINE"
                 value = "COVEREDRATIO"
-                minimum = "0.85".toBigDecimal()
+                minimum = "0.90".toBigDecimal()
             }
 
             limit {
