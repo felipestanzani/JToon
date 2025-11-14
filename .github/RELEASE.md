@@ -1,6 +1,6 @@
 # Release Process
 
-This document describes how to create a new release of Toon.
+This document describes how to create a new release of JToon.
 
 ## Automated Release via GitHub Actions
 
@@ -41,7 +41,7 @@ The project uses GitHub Actions to automatically build and release when a versio
 
 The release will include:
 
-- `Toon-{version}.jar` - Main library JAR
+- `JToon-{version}.jar` - Main library JAR
 - Automatically generated release notes
 
 ### Pre-release Versions
