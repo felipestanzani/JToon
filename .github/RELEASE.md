@@ -30,12 +30,12 @@ The project uses GitHub Actions to automatically build and release when a versio
    ```
 
 4. **Wait for the workflow to complete**
-   - The GitHub Actions workflow will automatically:
-     - Build the project
-     - Run all tests
-     - Create a GitHub release
-     - Attach the JAR file to the release
-     - Generate release notes from commits
+    - The GitHub Actions workflow will automatically:
+        - Build the project
+        - Run all tests
+        - Create a GitHub release
+        - Attach the JAR file to the release
+        - Generate release notes from commits
 
 ### Release Artifacts
 
@@ -46,7 +46,8 @@ The release will include:
 
 ### Pre-release Versions
 
-If your version contains a dash (e.g., `1.0-SNAPSHOT`, `2.0-beta`), the release will be marked as a pre-release automatically.
+If your version contains a dash (e.g., `1.0-SNAPSHOT`, `2.0-beta`), 
+the release will be marked as a pre-release automatically.
 
 ### Version Tag Format
 
@@ -59,7 +60,8 @@ Use semantic versioning with a `v` prefix:
 
 ## Continuous Integration
 
-Every push to `main`, `master`, or `develop` branches, and every pull request, triggers the build workflow which:
+Every push to `main`, `master`, or `develop` branches, and every pull request, 
+triggers the build workflow which:
 
 - Compiles the code
 - Runs all tests
