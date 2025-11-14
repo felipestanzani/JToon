@@ -17,7 +17,7 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
-      
+
       - name: Extract version from tag
         id: get_version
         run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
@@ -29,20 +29,20 @@ jobs:
           echo "version=$VERSION" > gradle.properties
           echo "gradle.properties criado:"
           cat gradle.properties
-      
+
       - name: Set up JDK 21
         uses: actions/setup-java@v5
         with:
           java-version: '21'
           distribution: 'temurin'
           cache: 'gradle'
-      
+
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-      
+
       - name: Build with Gradle
         run: ./gradlew build
-      
+
       - name: Validate Maven Central credentials
         run: |
           if [ -z "${{ secrets.MAVEN_CENTRAL_TOKEN }}" ]; then
@@ -52,23 +52,23 @@ jobs:
           echo "✅ Maven Central token is set (length: ${#MAVEN_CENTRAL_TOKEN})"
         env:
           MAVEN_CENTRAL_TOKEN: ${{ secrets.MAVEN_CENTRAL_TOKEN }}
-      
+
       - name: Check curl version
         run: curl --version
-      
+
       - name: Publish to Maven Central
         run: ./gradlew publishToMavenCentral
         env:
           MAVEN_CENTRAL_TOKEN: ${{ secrets.MAVEN_CENTRAL_TOKEN }}
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-      
+
       - name: Update README version
         run: |
           VERSION=${{ steps.get_version.outputs.VERSION }}
           sed -i "s/jtoon:[0-9]\+\.[0-9]\+\.[0-9]\+/jtoon:$VERSION/g" README.md
           sed -i "s/<version>[0-9]\+\.[0-9]\+\.[0-9]\+<\/version>/<version>$VERSION<\/version>/g" README.md
-      
+
       - name: Commit README changes
         run: |
           git config user.name "github-actions[bot]"
@@ -78,7 +78,7 @@ jobs:
           git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
@@ -88,7 +88,20 @@ jobs:
           prerelease: ${{ contains(steps.get_version.outputs.VERSION, '-') }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
+
+      - name: Generate JaCoCo Badge
+        uses: cicirello/jacoco-badge-generator@v2.12.1
+        with:
+          generate-branches-badge: true
+          jacoco-csv-file: build/customJacocoReportDir/test/jacocoTestReport.csv
+
+      - name: Update Jacoco Badge
+        uses: test-room-7/action-update-file@v2.0.0
+        with:
+          file-path: .github/badges/jacoco.svg
+          commit-msg: Update Jacoco Badge
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Upload build artifacts
         uses: actions/upload-artifact@v5
         if: always()

@@ -39,7 +39,7 @@ public final class PrimitiveEncoder {
      */
     private static String encodeNumber(JsonNode value) {
         if (value.isIntegralNumber()) {
-            return value.asText();
+            return value.asString();
         }
 
         double doubleValue = value.asDouble();

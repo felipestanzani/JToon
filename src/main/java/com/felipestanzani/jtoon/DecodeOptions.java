@@ -10,21 +10,23 @@ package com.felipestanzani.jtoon;
  *                     IllegalArgumentException on invalid input. When false,
  *                     uses best-effort parsing and returns null on errors
  *                     (default: true)
+ * @param expandPaths  Path expansion mode for dotted keys (default: OFF)
  */
 public record DecodeOptions(
         int indent,
         Delimiter delimiter,
-        boolean strict) {
+        boolean strict,
+        PathExpansion expandPaths) {
     /**
-     * Default decoding options: 2 spaces indent, comma delimiter, strict validation
+     * Default decoding options: 2 spaces indent, comma delimiter, strict validation, path expansion off
      */
-    public static final DecodeOptions DEFAULT = new DecodeOptions(2, Delimiter.COMMA, true);
+    public static final DecodeOptions DEFAULT = new DecodeOptions(2, Delimiter.COMMA, true, PathExpansion.OFF);
 
     /**
      * Creates DecodeOptions with default values.
      */
     public DecodeOptions() {
-        this(2, Delimiter.COMMA, true);
+        this(2, Delimiter.COMMA, true, PathExpansion.OFF);
     }
 
     /**
@@ -32,7 +34,7 @@ public record DecodeOptions(
      * mode.
      */
     public static DecodeOptions withIndent(int indent) {
-        return new DecodeOptions(indent, Delimiter.COMMA, true);
+        return new DecodeOptions(indent, Delimiter.COMMA, true, PathExpansion.OFF);
     }
 
     /**
@@ -40,7 +42,7 @@ public record DecodeOptions(
      * mode.
      */
     public static DecodeOptions withDelimiter(Delimiter delimiter) {
-        return new DecodeOptions(2, delimiter, true);
+        return new DecodeOptions(2, delimiter, true, PathExpansion.OFF);
     }
 
     /**
@@ -48,6 +50,6 @@ public record DecodeOptions(
      * delimiter.
      */
     public static DecodeOptions withStrict(boolean strict) {
-        return new DecodeOptions(2, Delimiter.COMMA, strict);
+        return new DecodeOptions(2, Delimiter.COMMA, strict, PathExpansion.OFF);
     }
 }

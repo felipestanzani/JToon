@@ -1,6 +1,5 @@
-package com.felipestanzani.jtoon;
+package com.felipestanzani.jtoon.normalizer;
 
-import com.felipestanzani.jtoon.normalizer.JsonNormalizer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Tag;

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -309,7 +310,7 @@ public class RoundTripTest {
             data.put("tags", Arrays.asList("a", "b", "c"));
 
             EncodeOptions encodeOpts = new EncodeOptions(2, Delimiter.TAB, false);
-            DecodeOptions decodeOpts = new DecodeOptions(2, Delimiter.TAB, true);
+            DecodeOptions decodeOpts = new DecodeOptions(2, Delimiter.TAB, true, PathExpansion.OFF);
 
             String toon = JToon.encode(data, encodeOpts);
             Object decoded = JToon.decode(toon, decodeOpts);
@@ -324,7 +325,7 @@ public class RoundTripTest {
             data.put("tags", Arrays.asList("a", "b", "c"));
 
             EncodeOptions encodeOpts = new EncodeOptions(2, Delimiter.PIPE, false);
-            DecodeOptions decodeOpts = new DecodeOptions(2, Delimiter.PIPE, true);
+            DecodeOptions decodeOpts = new DecodeOptions(2, Delimiter.PIPE, true, PathExpansion.OFF);
 
             String toon = JToon.encode(data, encodeOpts);
             Object decoded = JToon.decode(toon, decodeOpts);
@@ -372,8 +373,8 @@ public class RoundTripTest {
             String toon = JToon.encode(data);
             Object decoded = JToon.decode(toon);
 
-            // Empty object encodes to empty string, which decodes to null
-            assertNull(decoded);
+            // Empty object encodes to empty string, which decodes to empty object
+            assertEquals(Collections.emptyMap(), decoded);
         }
 
         @Test

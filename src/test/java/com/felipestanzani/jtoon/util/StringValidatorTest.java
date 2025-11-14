@@ -1,12 +1,18 @@
-package com.felipestanzani.jtoon;
+package com.felipestanzani.jtoon.util;
 
-import com.felipestanzani.jtoon.util.StringValidator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Unit tests for StringValidator utility class.
@@ -41,6 +47,25 @@ public class StringValidatorTest {
         @DisplayName("should return true for string with spaces")
         void testStringWithInnerSpaces() {
             assertTrue(StringValidator.isSafeUnquoted("hello world", ","));
+        }
+
+        @Test
+        @DisplayName("should return false for a number")
+        void testNumber() {
+            assertFalse(StringValidator.isSafeUnquoted("123456", ","));
+        }
+
+        @Test
+        @DisplayName("should return false for a Scientific Notation number")
+        void testScientificNumber() {
+            assertFalse(StringValidator.isSafeUnquoted("-2.5E-8", ","));
+            assertFalse(StringValidator.isSafeUnquoted("1e10", ","));
+        }
+
+        @Test
+        @DisplayName("should return false for a octal number")
+        void testOctalNumber() {
+            assertFalse(StringValidator.isSafeUnquoted("07", ","));
         }
     }
 
@@ -369,6 +394,20 @@ public class StringValidatorTest {
         void testEmptyKey() {
             assertFalse(StringValidator.isValidUnquotedKey(""));
         }
+    }
+
+    @Test
+    @DisplayName("throws unsupported Operation Exception for calling the constructor")
+    void throwsOnConstructor() throws NoSuchMethodException {
+        final Constructor<StringValidator> constructor = StringValidator.class.getDeclaredConstructor();
+        constructor.setAccessible(true);
+
+        final InvocationTargetException thrown =
+                assertThrows(InvocationTargetException.class, constructor::newInstance);
+
+        final Throwable cause = thrown.getCause();
+        assertInstanceOf(UnsupportedOperationException.class, cause);
+        assertEquals("Utility class cannot be instantiated", cause.getMessage());
     }
 }
 

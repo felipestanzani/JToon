@@ -75,7 +75,7 @@ public class DecodeOptionsTest {
         @Test
         @DisplayName("should create options with all custom values")
         void testAllCustomValues() {
-            DecodeOptions options = new DecodeOptions(4, Delimiter.TAB, false);
+            DecodeOptions options = new DecodeOptions(4, Delimiter.TAB, false, PathExpansion.OFF);
             assertEquals(4, options.indent());
             assertEquals(Delimiter.TAB, options.delimiter());
             assertFalse(options.strict());
@@ -84,9 +84,9 @@ public class DecodeOptionsTest {
         @Test
         @DisplayName("should support all delimiter types")
         void testAllDelimiters() {
-            assertEquals(Delimiter.COMMA, new DecodeOptions(2, Delimiter.COMMA, true).delimiter());
-            assertEquals(Delimiter.TAB, new DecodeOptions(2, Delimiter.TAB, true).delimiter());
-            assertEquals(Delimiter.PIPE, new DecodeOptions(2, Delimiter.PIPE, true).delimiter());
+            assertEquals(Delimiter.COMMA, new DecodeOptions(2, Delimiter.COMMA, true, PathExpansion.OFF).delimiter());
+            assertEquals(Delimiter.TAB, new DecodeOptions(2, Delimiter.TAB, true, PathExpansion.OFF).delimiter());
+            assertEquals(Delimiter.PIPE, new DecodeOptions(2, Delimiter.PIPE, true, PathExpansion.OFF).delimiter());
         }
     }
 
@@ -97,8 +97,8 @@ public class DecodeOptionsTest {
         @Test
         @DisplayName("should be equal when values are equal")
         void testEquality() {
-            DecodeOptions options1 = new DecodeOptions(2, Delimiter.COMMA, true);
-            DecodeOptions options2 = new DecodeOptions(2, Delimiter.COMMA, true);
+            DecodeOptions options1 = new DecodeOptions(2, Delimiter.COMMA, true, PathExpansion.OFF);
+            DecodeOptions options2 = new DecodeOptions(2, Delimiter.COMMA, true, PathExpansion.OFF);
             assertEquals(options1, options2);
             assertEquals(options1.hashCode(), options2.hashCode());
         }
@@ -106,10 +106,10 @@ public class DecodeOptionsTest {
         @Test
         @DisplayName("should not be equal when values differ")
         void testInequality() {
-            DecodeOptions options1 = new DecodeOptions(2, Delimiter.COMMA, true);
-            DecodeOptions options2 = new DecodeOptions(4, Delimiter.COMMA, true);
-            DecodeOptions options3 = new DecodeOptions(2, Delimiter.PIPE, true);
-            DecodeOptions options4 = new DecodeOptions(2, Delimiter.COMMA, false);
+            DecodeOptions options1 = new DecodeOptions(2, Delimiter.COMMA, true, PathExpansion.OFF);
+            DecodeOptions options2 = new DecodeOptions(4, Delimiter.COMMA, true, PathExpansion.OFF);
+            DecodeOptions options3 = new DecodeOptions(2, Delimiter.PIPE, true, PathExpansion.OFF);
+            DecodeOptions options4 = new DecodeOptions(2, Delimiter.COMMA, false, PathExpansion.OFF);
 
             assertNotEquals(options1, options2);
             assertNotEquals(options1, options3);
@@ -119,7 +119,7 @@ public class DecodeOptionsTest {
         @Test
         @DisplayName("should have meaningful toString")
         void testToString() {
-            DecodeOptions options = new DecodeOptions(4, Delimiter.TAB, false);
+            DecodeOptions options = new DecodeOptions(4, Delimiter.TAB, false, PathExpansion.OFF);
             String str = options.toString();
             assertTrue(str.contains("4"), "ToString should contain indent value: " + str);
             assertTrue(str.contains("TAB") || str.contains("delimiter="), "ToString should contain delimiter: " + str);

@@ -5,7 +5,6 @@ import com.felipestanzani.jtoon.encoder.ValueEncoder;
 import com.felipestanzani.jtoon.normalizer.JsonNormalizer;
 import com.felipestanzani.jtoon.normalizer.XmlNormalizer;
 import tools.jackson.databind.JsonNode;
-import tools.jackson.databind.ObjectMapper;
 
 /**
  * Main API for encoding and decoding JToon format.
@@ -39,8 +38,6 @@ import tools.jackson.databind.ObjectMapper;
  * }</pre>
  */
 public final class JToon {
-
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     private JToon() {
         throw new UnsupportedOperationException("Utility class cannot be instantiated");
@@ -219,11 +216,6 @@ public final class JToon {
      *                                  invalid
      */
     public static String decodeToJson(String toon, DecodeOptions options) {
-        try {
-            Object decoded = ValueDecoder.decode(toon, options);
-            return OBJECT_MAPPER.writeValueAsString(decoded);
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Failed to convert decoded value to JSON: " + e.getMessage(), e);
-        }
+        return ValueDecoder.decodeToJson(toon, options);
     }
 }

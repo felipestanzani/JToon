@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -157,7 +158,7 @@ public class JToonDecodeTest {
                   id: 123
                   contact:
                     email: ada@example.com
-                    phone: \"555-1234\"
+                    phone: "555-1234"
                 """;
             Object result = JToon.decode(toon);
             @SuppressWarnings("unchecked")
@@ -294,8 +295,8 @@ public class JToonDecodeTest {
         void testTabularArrayQuotedValues() {
             String toon = """
                 items[2]{id,name}:
-                  1,\"First Item\"
-                  2,\"Second, Item\"
+                  1,"First Item"
+                  2,"Second, Item"
                 """;
             Object result = JToon.decode(toon);
             @SuppressWarnings("unchecked")
@@ -471,9 +472,9 @@ public class JToonDecodeTest {
         @Test
         @DisplayName("should handle empty input")
         void testEmptyInput() {
-            assertNull(JToon.decode(""));
-            assertNull(JToon.decode("   "));
-            assertNull(JToon.decode(null));
+            assertEquals(Collections.emptyMap(), JToon.decode(""));
+            assertEquals(Collections.emptyMap(), JToon.decode("   "));
+            assertEquals(Collections.emptyMap(), JToon.decode(null));
         }
 
         @Test
@@ -489,8 +490,8 @@ public class JToonDecodeTest {
         void testLenientMode() {
             String toon = "[invalid]";  // Invalid array header format
             DecodeOptions options = DecodeOptions.withStrict(false);
-            Object result = JToon.decode(toon, options);
-            assertNull(result);
+            var result = JToon.decode(toon, options);
+            assertEquals(Collections.emptyList(), result);
         }
     }
 

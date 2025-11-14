@@ -27,6 +27,53 @@ public final class StringEscaper {
     }
 
     /**
+     * Validates a quoted string for invalid escape sequences and unterminated strings.
+     *
+     * @param value The string to validate
+     * @throws IllegalArgumentException if the string has invalid escape sequences or is unterminated
+     */
+    public static void validateString(String value) {
+        if (value == null || value.isEmpty()) {
+            return;
+        }
+
+        // Check for unterminated string (starts with quote but doesn't end with quote)
+        if (value.startsWith("\"") && !value.endsWith("\"")) {
+            throw new IllegalArgumentException("Unterminated string");
+        }
+
+        // Check for invalid escape sequences in quoted strings
+        if (value.startsWith("\"") && value.endsWith("\"")) {
+            String unquoted = value.substring(1, value.length() - 1);
+            boolean escaped = false;
+
+            for (char c : unquoted.toCharArray()) {
+                if (escaped) {
+                    // Check if escape sequence is valid
+                    if (!isValidEscapeChar(c)) {
+                        throw new IllegalArgumentException("Invalid escape sequence: \\" + c);
+                    }
+                    escaped = false;
+                } else if (c == '\\') {
+                    escaped = true;
+                }
+            }
+
+            // Check for trailing backslash (invalid escape)
+            if (escaped) {
+                throw new IllegalArgumentException("Invalid escape sequence: trailing backslash");
+            }
+        }
+    }
+
+    /**
+     * Checks if a character is a valid escape sequence.
+     */
+    private static boolean isValidEscapeChar(char c) {
+        return c == 'n' || c == 'r' || c == 't' || c == '"' || c == '\\';
+    }
+
+    /**
      * Unescapes a string and removes surrounding quotes if present.
      * Reverses the escaping applied by {@link #escape(String)}.
      *

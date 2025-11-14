@@ -12,7 +12,7 @@ import static com.felipestanzani.jtoon.util.Constants.*;
 public final class StringValidator {
     private static final Pattern NUMERIC_PATTERN = Pattern.compile("^-?\\d+(?:\\.\\d+)?(?:e[+-]?\\d+)?$",
             Pattern.CASE_INSENSITIVE);
-    private static final Pattern OCTAL_PATTERN = Pattern.compile("^0\\d+$");
+    private static final Pattern OCTAL_PATTERN = Pattern.compile("^0[0-7]+$");
     private static final Pattern UNQUOTED_KEY_PATTERN = Pattern.compile("^[A-Z_][\\w.]*$", Pattern.CASE_INSENSITIVE);
     private static final Pattern STRUCTURAL_CHARS = Pattern.compile("[\\[\\]{}]");
     private static final Pattern CONTROL_CHARS = Pattern.compile("[\\n\\r\\t]");
@@ -87,8 +87,7 @@ public final class StringValidator {
     }
 
     private static boolean looksLikeNumber(String value) {
-        return NUMERIC_PATTERN.matcher(value).matches()
-                || OCTAL_PATTERN.matcher(value).matches();
+        return OCTAL_PATTERN.matcher(value).matches() || NUMERIC_PATTERN.matcher(value).matches();
     }
 
     private static boolean containsColon(String value) {

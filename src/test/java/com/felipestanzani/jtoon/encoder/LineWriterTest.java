@@ -1,6 +1,5 @@
-package com.felipestanzani.jtoon;
+package com.felipestanzani.jtoon.encoder;
 
-import com.felipestanzani.jtoon.encoder.LineWriter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Tag;
