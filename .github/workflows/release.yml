@@ -13,7 +13,7 @@ jobs:
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v5.0.0
         with:
           ref: main
           fetch-depth: 0
@@ -31,7 +31,7 @@ jobs:
           cat gradle.properties
 
       - name: Set up JDK 21
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@v5.0.0
         with:
           java-version: '21'
           distribution: 'temurin'
@@ -66,7 +66,7 @@ jobs:
       - name: Update README version
         run: |
           VERSION=${{ steps.get_version.outputs.VERSION }}
-          sed -i "s/jtoon:[0-9]\+\.[0-9]\+\.[0-9]\+/jtoon:$VERSION/g" README.md
+          sed -i "s/toon:[0-9]\+\.[0-9]\+\.[0-9]\+/toon:$VERSION/g" README.md
           sed -i "s/<version>[0-9]\+\.[0-9]\+\.[0-9]\+<\/version>/<version>$VERSION<\/version>/g" README.md
 
       - name: Commit README changes
@@ -80,7 +80,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v2.4.2
         with:
           files: build/libs/*.jar
           generate_release_notes: true
@@ -111,4 +111,3 @@ jobs:
             build/libs/*.jar
             build/reports/tests/test/
           retention-days: 30
-
