@@ -76,3 +76,11 @@ jacocoTestCoverageVerification {
     }
 }
 check.dependsOn jacocoTestReport
+
+tasks.register('specsValidation', Test) {
+    description = 'Runs only a specific test class'
+    group = 'verification'
+
+    // Replace with your test class name
+    include '**/ConformanceTest.class'
+}
