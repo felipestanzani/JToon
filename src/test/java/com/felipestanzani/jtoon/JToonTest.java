@@ -757,7 +757,7 @@ public class JToonTest {
             String xml = "<user><id>123</id><name>Ada</name></user>";
             EncodeOptions options = new EncodeOptions(4, Delimiter.PIPE, true);
             String result = JToon.encodeXml(xml, options);
-lid            assertEquals("id: \"123\"\nname: Ada", result);
+            assertEquals("id: \"123\"\nname: Ada", result);
         }
 
         @Test
