@@ -69,7 +69,7 @@ jobs:
       - name: Update README version
         run: |
           VERSION=${{ steps.get_version.outputs.VERSION }}
-          sed -i "s/toon:[0-9]\+\.[0-9]\+\.[0-9]\+/toon:$VERSION/g" README.md
+          sed -i "s/jtoon:[0-9]\+\.[0-9]\+\.[0-9]\+/jtoon:$VERSION/g" README.md
           sed -i "s/<version>[0-9]\+\.[0-9]\+\.[0-9]\+<\/version>/<version>$VERSION<\/version>/g" README.md
 
       - name: Commit README changes
@@ -106,7 +106,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v5.0.0
         if: always()
         with:
           name: build-artifacts
