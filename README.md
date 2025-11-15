@@ -98,7 +98,7 @@ You can also download the JAR directly from the [GitHub Releases](https://github
 ## Quick Start
 
 ```java
-import com.felipestanzani.jtoon.JToon;
+import dev.toonformat.jtoon.JToon;
 import java.util.*;
 
 record User(int id, String name, List<String> tags, boolean active, List<?> preferences) {}
@@ -217,7 +217,7 @@ A TOON-formatted string with no trailing newline or spaces.
 **Example:**
 
 ```java
-import com.felipestanzani.jtoon.JToon;
+import dev.toonformat.jtoon.JToon;
 import java.util.*;
 
 record Item(String sku, int qty, double price) {}
@@ -271,10 +271,11 @@ The `delimiter` option allows you to choose between comma (default), tab, or pip
 Using tab delimiters instead of commas can reduce token count further, especially for tabular data:
 
 ```java
-import com.felipestanzani.jtoon.*;
+import dev.toonformat.jtoon.*;
 import java.util.*;
 
 record Item(String sku, String name, int qty, double price) {}
+
 record Data(List<Item> items) {}
 
 Item item1 = new Item("A1", "Widget", 2, 9.99);
@@ -327,10 +328,11 @@ items[2|]{sku|name|qty|price}:
 The `lengthMarker` option adds an optional hash (`#`) prefix to array lengths to emphasize that the bracketed value represents a count, not an index:
 
 ```java
-import com.felipestanzani.jtoon.*;
+import dev.toonformat.jtoon.*;
 import java.util.*;
 
 record Item(String sku, int qty, double price) {}
+
 record Data(List<String> tags, List<Item> items) {}
 
 Item item1 = new Item("A1", 2, 9.99);
@@ -378,7 +380,7 @@ For `decodeToJson`: A JSON string representation
 **Example:**
 
 ```java
-import com.felipestanzani.jtoon.JToon;
+import dev.toonformat.jtoon.JToon;
 
 String toon = """
     users[2]{id,name,role}:
@@ -396,7 +398,7 @@ String json = JToon.decodeToJson(toon);
 #### Round-Trip Conversion
 
 ```java
-import com.felipestanzani.jtoon.*;
+import dev.toonformat.jtoon.*;
 import java.util.*;
 
 // Original data
@@ -405,11 +407,11 @@ data.put("id", 123);
 data.put("name", "Ada");
 data.put("tags", Arrays.asList("dev", "admin"));
 
-// Encode to TOON
+ // Encode to TOON
 String toon = JToon.encode(data);
 
 // Decode back to objects
-Object decoded = JToon.decode(toon);
+ Object decoded = JToon.decode(toon);
 
 // Values are preserved (note: integers decode as Long)
 ```
@@ -417,7 +419,7 @@ Object decoded = JToon.decode(toon);
 #### Custom Decode Options
 
 ```java
-import com.felipestanzani.jtoon.*;
+import dev.toonformat.jtoon.*;
 
 String toon = "tags[3|]: a|b|c";
 
