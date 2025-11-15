@@ -4,18 +4,18 @@
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            artifactId = 'toon'
+            artifactId = 'jtoon'
             from components.java
             
             pom {
                 name = 'Toon'
                 description = project.description
-                url = 'https://github.com/toon-format/toon-java'
+                url = 'https://github.com/toon-format/jtoon'
                 
                 licenses {
                     license {
                         name = 'MIT License'
-                        url = 'https://github.com/toon-format/toon-java/blob/main/LICENSE.md'
+                        url = 'https://github.com/toon-format/jtoon/blob/main/LICENSE.md'
                     }
                 }
                 
@@ -28,9 +28,9 @@ publishing {
                 }
                 
                 scm {
-                    connection = 'scm:git:git://github.com/toon-format/toon-java/toon-java.git'
-                    developerConnection = 'scm:git:ssh://github.com:toon-format/toon-java.git'
-                    url = 'https://github.com/toon-format/toon-java/toon-java'
+                    connection = 'scm:git:git://github.com/toon-format/jtoon/jtoon.git'
+                    developerConnection = 'scm:git:ssh://github.com:toon-format/jtoon.git'
+                    url = 'https://github.com/toon-format/jtoon/jtoon'
                 }
             }
         }
