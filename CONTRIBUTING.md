@@ -23,23 +23,27 @@ cd JToon
 
 ## Development Workflow
 
-1. Fork the repository and create a feature branch
-2. Make your changes following the coding standards below
-3. Add tests for any new functionality
-4. Ensure all tests pass and coverage remains high
-5. Submit a pull request with a clear description
+1. **Fork the repository** and create a feature branch
+2. **Make your changes** following the coding standards below
+3. **Add tests** for any new functionality
+4. **Ensure all tests pass** and coverage remains high
+5. **Submit a pull request** with a clear description
+
+### New features
+
+1. **Open a discussion topic** about the new features explaining the advantages or the motivation for this new feature.
+2. **After approval** create an Issue linked to the discussion topic.
+3. **Follow the development workflow** to implement the new feature.
+
+### Bugs
+
+1. **Open an issue** reporting the bug with detailed reproduction steps.
 
 ## Coding Standards
 
 ### Java Version Support
 
 We support Java 17 and above.
-
-### Type Safety
-
-- Use strong typing and avoid raw types
-- Leverage Java's type system for compile-time safety
-- Use `@NonNull` and `@Nullable` annotations where appropriate
 
 ### Code Style
 
@@ -52,7 +56,7 @@ We support Java 17 and above.
 ### Testing
 
 - All new features must include tests
-- Maintain test coverage at 80%+ (enforced in CI)
+- Maintain test coverage at **75%+ (enforced in CI)** for files and **85%+ for overall project**
 - Tests should cover edge cases and spec compliance
 - Use JUnit 5 for unit tests
 - Run the full test suite:
@@ -76,7 +80,6 @@ Before submitting changes that affect encoding/decoding behavior:
 1. Verify against the official SPEC.md
 2. Add tests for the specific spec sections you're implementing
 3. Document any spec version requirements
-4. Update conformance tests in `src/test/resources/conformance/` if needed
 
 ## Pull Request Guidelines
 
@@ -91,14 +94,16 @@ Before submitting changes that affect encoding/decoding behavior:
 - **GitHub Issues:** For bug reports and feature requests
 - **GitHub Discussions:** For questions and general discussion
 - **Pull Requests:** For code reviews and implementation discussion
+- **[Discord channel](https://discord.gg/ywXDMFdx):** For direct interaction with project members
 
-## Maintainer
+## Co-Maintainers
 
-This project is maintained by:
+This is a collaborative project. Current maintainers:
 
 - [@felipestanzani](https://github.com/felipestanzani)
+- [@jenspapenhagen](https://github.com/jenspapenhagen)
 
-For major architectural decisions, please open a discussion issue first.
+All maintainers have equal and consensual decision-making power. For major architectural decisions, please open a discussion issue first.
 
 ## License
 

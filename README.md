@@ -1,61 +1,15 @@
-![TOON logo with step‑by‑step guide](./.github/og.png)
-
-# JToon - Token-Oriented Object Notation (TOON)
+# JToon - TOON Format for Java
 
 [![Build](https://github.com/toon-format/jtoon/actions/workflows/build.yml/badge.svg)](https://github.com/toon-format/jtoon/actions/workflows/build.yml)
 [![Release](https://github.com/toon-format/jtoon/actions/workflows/release.yml/badge.svg)](https://github.com/toon-format/jtoon/actions/workflows/release.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/com.felipestanzani/jtoon.svg)](https://central.sonatype.com/artifact/com.felipestanzani/jtoon)
 ![Coverage](.github/badges/jacoco.svg)
 
-**Token-Oriented Object Notation** is a compact, human-readable format designed for passing structured data to Large Language Models with significantly reduced token usage.
+> **⚠️ Beta Status (v0.1.x):** This library is in active development and working towards spec compliance. Beta published to Maven Central. API may change before 1.0.0 release.
 
-TOON excels at **uniform complex objects** – multiple fields per row, same structure across items. It borrows YAML's indentation-based structure for nested objects and CSV's tabular format for uniform data rows, then optimizes both for token efficiency in LLM contexts.
+Compact, human-readable serialization format for LLM contexts with **30-60% token reduction** vs JSON. Combines YAML-like indentation with CSV-like tabular arrays. Working towards full compatibility with the [official TOON specification](https://github.com/toon-format/spec).
 
-## Why TOON?
-
-AI is becoming cheaper and more accessible, but larger context windows allow for larger data inputs as well. **LLM tokens still cost money** – and standard JSON is verbose and token-expensive:
-
-```json
-{
-  "users": [
-    { "id": 1, "name": "Alice", "role": "admin" },
-    { "id": 2, "name": "Bob", "role": "user" }
-  ]
-}
-```
-
-TOON conveys the same information with **fewer tokens**:
-
-```
-users[2]{id,name,role}:
-  1,Alice,admin
-  2,Bob,user
-```
-
-*Test the differences on [THIS online playground](https://www.curiouslychase.com/playground/format-tokenization-exploration)*
-
-<details>
-<summary>Another reason</summary>
-
-[![xkcd: Standards](https://imgs.xkcd.com/comics/standards_2x.png)](https://xkcd.com/927/)
-
-</details>
-
-## Benchmarks
-
-> **Learn more:** For complete format specification, rules, and additional benchmarks, see [TOON-SPECIFICATION.md](TOON-SPECIFICATION.md).
-
-### Token Efficiency Example
-
-TOON typically achieves **30–60% fewer tokens than JSON**. Here's a quick summary:
-
-```
-Total across 4 datasets        ████████████░░░░░░░░░░░░░  13,418 tokens
-                               vs JSON: 26,379  💰 49.1% saved
-                               vs XML:  30,494  💰 56.0% saved
-```
-
-**See [TOON-SPECIFICATION.md](TOON-SPECIFICATION.md#benchmarks) for detailed benchmark results and LLM retrieval accuracy tests.**
+**Key Features:** Minimal syntax • TOON Encoding and Decoding • Tabular arrays for uniform data • Array length validation • Java 17 • Comprehensive test coverage.
 
 ## Installation
 
@@ -119,41 +73,6 @@ user:
   tags[2]: reading,gaming
   active: true
   preferences[0]:
-```
-
-## TOON Format Basics
-
-> **Complete specification:** For detailed formatting rules, quoting rules, and comprehensive examples, see [TOON-SPECIFICATION.md](TOON-SPECIFICATION.md).
-
-TOON uses indentation-based structure (like YAML) combined with efficient tabular format for uniform arrays (like CSV):
-
-**Simple objects:**
-
-```
-id: 123
-name: Ada
-```
-
-**Nested objects:**
-
-```
-user:
-  id: 123
-  name: Ada
-```
-
-**Primitive arrays:**
-
-```
-tags[3]: admin,ops,dev
-```
-
-**Tabular arrays** (uniform objects with same fields):
-
-```
-items[2]{sku,qty,price}:
-  A1,2,9.99
-  B2,1,14.5
 ```
 
 ## Type Conversions
@@ -432,24 +351,31 @@ DecodeOptions lenient = DecodeOptions.withStrict(false);
 Object result2 = JToon.decode(invalidToon, lenient);
 ```
 
-## See Also
+**CI/CD:** GitHub Actions • Java 17 • Coverage enforcement • PR coverage comments
 
-- **[TOON Format Specification](TOON-SPECIFICATION.md)** – Complete format rules, benchmarks, and examples
-- **[Changelog](CHANGELOG.md)** – Version history and notable changes
+## Project Status
 
-## Implementations in Other Languages
+This project is 100% compliant with TOON specification. Release conformance enforced on CI/CD.
 
-- **TypeScript/JavaScript**: [@johannschopplich/toon](https://github.com/johannschopplich/toon) (original)
-- **Elixir:** [toon_ex](https://github.com/kentaro/toon_ex)
-- **PHP:** [toon-php](https://github.com/HelgeSverre/toon-php)
-- **Python:** [python-toon](https://github.com/xaviviro/python-toon) or [pytoon](https://github.com/bpradana/pytoon)
-- **Ruby:** [toon-ruby](https://github.com/andrepcg/toon-ruby)
-- **Java:** [JToon](https://github.com/toon-format/JToon)
-- **.NET:** [toon.NET](https://github.com/ghost1face/toon.NET)
-- **Swift:** [TOONEncoder](https://github.com/mattt/TOONEncoder)
-- **Go:** [gotoon](https://github.com/alpkeskin/gotoon)
-- **Rust:** [toon-rs](https://github.com/JadJabbour/toon-rs)
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
+
+## Documentation
+
+- [📘 Full Documentation](docs/) - Complete guides and references
+- [🔧 API Reference](docs/api.md) - Detailed function documentation
+- [📋 Format Specification](docs/format.md) - TOON syntax and rules
+- [🤖 LLM Integration](docs/llm-integration.md) - Best practices for LLM usage
+- [📜 TOON Spec](https://github.com/toon-format/spec) - Official specification
+- [🐛 Issues](https://github.com/toon-format/jtoon/issues) - Bug reports and features
+- [🤝 Contributing](CONTRIBUTING.md) - Contribution guidelines
+
+## Contributors
+
+- [Xavi Vinaixa](https://github.com/xaviviro)
+- [David Pirogov](https://github.com/davidpirogov)
+- [Justar](https://github.com/Justar96)
+- [Johann Schopplich](https://github.com/johannschopplich)
 
 ## License
 
-[MIT](./LICENSE) License © 2025-PRESENT [Felipe Stanzani](https://felipestanzani.com)
+MIT License – see [LICENSE](LICENSE) for details
