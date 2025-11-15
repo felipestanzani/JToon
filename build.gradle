@@ -77,6 +77,19 @@ jacocoTestCoverageVerification {
 }
 check.dependsOn jacocoTestReport
 
+tasks.register('generateJavadoc', Javadoc) {
+    description = 'Generates Javadoc HTML documentation in the documentation/javadoc folder'
+    group = 'documentation'
+    
+    source = sourceSets.main.allJava
+    classpath = sourceSets.main.compileClasspath
+    destinationDir = file('documentation/javadoc')
+    
+    options.encoding = 'UTF-8'
+    options.docEncoding = 'UTF-8'
+    options.charSet = 'UTF-8'
+}
+
 tasks.register('specsValidation', Test) {
     description = 'Runs only a specific test class'
     group = 'verification'
