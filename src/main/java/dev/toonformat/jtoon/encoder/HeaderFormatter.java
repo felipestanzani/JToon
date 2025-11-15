@@ -50,6 +50,12 @@ public final class HeaderFormatter {
     /**
      * Legacy method for backward compatibility.
      * Delegates to the record-based format method.
+     * @param length the array or table length
+     * @param key optional key prefix
+     * @param fields optional field names for tabular format
+     * @param delimiter the delimiter being used
+     * @param lengthMarker whether to include # marker before length
+     * @return formatted header string
      */
     public static String format(
             int length,

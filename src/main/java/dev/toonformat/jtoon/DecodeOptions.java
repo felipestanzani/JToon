@@ -32,6 +32,8 @@ public record DecodeOptions(
     /**
      * Creates DecodeOptions with custom indent, using default delimiter and strict
      * mode.
+     * @param indent number of spaces per indentation level
+     * @return a new DecodeOptions instance with the specified indent
      */
     public static DecodeOptions withIndent(int indent) {
         return new DecodeOptions(indent, Delimiter.COMMA, true, PathExpansion.OFF);
@@ -40,6 +42,8 @@ public record DecodeOptions(
     /**
      * Creates DecodeOptions with custom delimiter, using default indent and strict
      * mode.
+     * @param delimiter the delimiter to use for tabular arrays and inline primitive arrays
+     * @return a new DecodeOptions instance with the specified delimiter
      */
     public static DecodeOptions withDelimiter(Delimiter delimiter) {
         return new DecodeOptions(2, delimiter, true, PathExpansion.OFF);
@@ -48,6 +52,8 @@ public record DecodeOptions(
     /**
      * Creates DecodeOptions with custom strict mode, using default indent and
      * delimiter.
+     * @param strict whether to enable strict validation mode
+     * @return a new DecodeOptions instance with the specified strict mode
      */
     public static DecodeOptions withStrict(boolean strict) {
         return new DecodeOptions(2, Delimiter.COMMA, strict, PathExpansion.OFF);

@@ -29,6 +29,8 @@ public record EncodeOptions(
     /**
      * Creates EncodeOptions with custom indent, using default delimiter and length
      * marker.
+     * @param indent number of spaces per indentation level
+     * @return a new EncodeOptions instance with the specified indent
      */
     public static EncodeOptions withIndent(int indent) {
         return new EncodeOptions(indent, Delimiter.COMMA, false);
@@ -37,6 +39,8 @@ public record EncodeOptions(
     /**
      * Creates EncodeOptions with custom delimiter, using default indent and length
      * marker.
+     * @param delimiter the delimiter to use for tabular arrays and inline primitive arrays
+     * @return a new EncodeOptions instance with the specified delimiter
      */
     public static EncodeOptions withDelimiter(Delimiter delimiter) {
         return new EncodeOptions(2, delimiter, false);
@@ -45,6 +49,8 @@ public record EncodeOptions(
     /**
      * Creates EncodeOptions with custom length marker, using default indent and
      * delimiter.
+     * @param lengthMarker whether to include the # marker before array lengths
+     * @return a new EncodeOptions instance with the specified length marker setting
      */
     public static EncodeOptions withLengthMarker(boolean lengthMarker) {
         return new EncodeOptions(2, Delimiter.COMMA, lengthMarker);

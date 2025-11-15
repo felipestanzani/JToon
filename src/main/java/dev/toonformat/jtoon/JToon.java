@@ -5,6 +5,10 @@ import dev.toonformat.jtoon.encoder.ValueEncoder;
 import dev.toonformat.jtoon.normalizer.JsonNormalizer;
 import tools.jackson.databind.JsonNode;
 
+/**
+ * Main entry point for encoding and decoding TOON (Token-Oriented Object Notation) format.
+ * Provides static methods to convert between Java objects, JSON strings, and TOON format.
+ */
 public final class JToon {
 
     private JToon() {

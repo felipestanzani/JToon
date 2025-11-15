@@ -40,6 +40,11 @@ public final class ObjectEncoder {
 
     /**
      * Encodes a key-value pair in an object.
+     * @param key the key name
+     * @param value the value to encode
+     * @param writer the LineWriter for accumulating output
+     * @param depth the current indentation depth
+     * @param options encoding options
      */
     public static void encodeKeyValuePair(String key, JsonNode value, LineWriter writer, int depth,
                                           EncodeOptions options) {

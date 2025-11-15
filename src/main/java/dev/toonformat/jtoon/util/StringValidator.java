@@ -24,6 +24,9 @@ public final class StringValidator {
     /**
      * Checks if a string can be safely written without quotes.
      * Uses guard clauses and early returns for clarity.
+     * @param value the string value to check
+     * @param delimiter the delimiter being used (for validation)
+     * @return true if the string can be safely written without quotes, false otherwise
      */
     public static boolean isSafeUnquoted(String value, String delimiter) {
         if (isNullOrEmpty(value)) {
@@ -67,6 +70,8 @@ public final class StringValidator {
 
     /**
      * Checks if a key can be used without quotes.
+     * @param key the key to validate
+     * @return true if the key can be used without quotes, false otherwise
      */
     public static boolean isValidUnquotedKey(String key) {
         return UNQUOTED_KEY_PATTERN.matcher(key).matches();
