@@ -2,8 +2,8 @@
 
 # JToon - Token-Oriented Object Notation (TOON)
 
-[![Build](https://github.com/felipestanzani/jtoon/actions/workflows/build.yml/badge.svg)](https://github.com/felipestanzani/jtoon/actions/workflows/build.yml)
-[![Release](https://github.com/felipestanzani/jtoon/actions/workflows/release.yml/badge.svg)](https://github.com/felipestanzani/jtoon/actions/workflows/release.yml)
+[![Build](https://github.com/toon-format/jtoon/actions/workflows/build.yml/badge.svg)](https://github.com/toon-format/jtoon/actions/workflows/build.yml)
+[![Release](https://github.com/toon-format/jtoon/actions/workflows/release.yml/badge.svg)](https://github.com/toon-format/jtoon/actions/workflows/release.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/com.felipestanzani/jtoon.svg)](https://central.sonatype.com/artifact/com.felipestanzani/jtoon)
 ![Coverage](.github/badges/jacoco.svg)
 
@@ -93,7 +93,7 @@ dependencies {
 
 ### Alternative: Manual Installation
 
-You can also download the JAR directly from the [GitHub Releases](https://github.com/felipestanzani/jtoon/releases) page and add it to your project's classpath.
+You can also download the JAR directly from the [GitHub Releases](https://github.com/toon-format/jtoon/releases) page and add it to your project's classpath.
 
 ## Quick Start
 
@@ -444,7 +444,7 @@ Object result2 = JToon.decode(invalidToon, lenient);
 - **PHP:** [toon-php](https://github.com/HelgeSverre/toon-php)
 - **Python:** [python-toon](https://github.com/xaviviro/python-toon) or [pytoon](https://github.com/bpradana/pytoon)
 - **Ruby:** [toon-ruby](https://github.com/andrepcg/toon-ruby)
-- **Java:** [JToon](https://github.com/felipestanzani/JToon)
+- **Java:** [JToon](https://github.com/toon-format/JToon)
 - **.NET:** [toon.NET](https://github.com/ghost1face/toon.NET)
 - **Swift:** [TOONEncoder](https://github.com/mattt/TOONEncoder)
 - **Go:** [gotoon](https://github.com/alpkeskin/gotoon)
