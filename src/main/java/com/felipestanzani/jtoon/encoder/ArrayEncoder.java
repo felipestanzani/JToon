@@ -91,6 +91,8 @@ public final class ArrayEncoder {
 
     /**
      * Checks if an array contains only arrays.
+     * @param array for testing that only arrays are inside of it
+     * @return true or false
      */
     public static boolean isArrayOfArrays(JsonNode array) {
         if (!array.isArray()) {
@@ -106,6 +108,8 @@ public final class ArrayEncoder {
 
     /**
      * Checks if an array contains only objects.
+     * @param array that contains only objects inside of it
+     * @return true or false
      */
     public static boolean isArrayOfObjects(JsonNode array) {
         if (!array.isArray()) {
@@ -130,6 +134,11 @@ public final class ArrayEncoder {
 
     /**
      * Formats an inline primitive array with header and values.
+     *
+     * @param values Primitive array
+     * @param delimiter The delimiter being used
+     * @param prefix Optional key prefix
+     * @param lengthMarker Whether to include # marker before length
      */
     public static String formatInlineArray(ArrayNode values, String delimiter, String prefix, boolean lengthMarker) {
         List<JsonNode> valueList = new ArrayList<>();
