@@ -22,6 +22,9 @@ public final class PrimitiveEncoder {
 
     /**
      * Encodes a primitive JsonNode value.
+     * @param value the primitive value to encode
+     * @param delimiter the delimiter to use (for string validation)
+     * @return the encoded string representation
      */
     public static String encodePrimitive(JsonNode value, String delimiter) {
         return switch (value.getNodeType()) {
@@ -71,6 +74,9 @@ public final class PrimitiveEncoder {
     /**
      * Encodes a string literal, quoting if necessary.
      * Delegates validation to StringValidator and escaping to StringEscaper.
+     * @param value the string value to encode
+     * @param delimiter the delimiter to use (for validation)
+     * @return the encoded string, quoted if necessary
      */
     public static String encodeStringLiteral(String value, String delimiter) {
         if (StringValidator.isSafeUnquoted(value, delimiter)) {
@@ -83,6 +89,8 @@ public final class PrimitiveEncoder {
     /**
      * Encodes an object key, quoting if necessary.
      * Delegates validation to StringValidator and escaping to StringEscaper.
+     * @param key the key to encode
+     * @return the encoded key, quoted if necessary
      */
     public static String encodeKey(String key) {
         if (StringValidator.isValidUnquotedKey(key)) {
@@ -94,6 +102,9 @@ public final class PrimitiveEncoder {
 
     /**
      * Joins encoded primitive values with the specified delimiter.
+     * @param values the list of primitive values to join
+     * @param delimiter the delimiter to use between values
+     * @return the joined string of encoded values
      */
     public static String joinEncodedValues(List<JsonNode> values, String delimiter) {
         return values.stream()

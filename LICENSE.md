@@ -1,6 +1,11 @@
 MIT License
 
+Copyright (c) 2025-PRESENT Aaro Koinsaari
 Copyright (c) 2025-PRESENT Felipe Cesar Stanzani Fonseca
+Copyright (c) 2025-PRESENT Jens Papenhagen
+Copyright (c) 2025-PRESENT Johann Schopplich
+
+
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

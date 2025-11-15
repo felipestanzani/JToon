@@ -76,6 +76,7 @@ public final class ArrayEncoder {
     /**
      * Checks if an array contains only primitive values.
      * @param array for testing that all items are primitives
+     * @return true if all items in the array are primitive values, false otherwise
      */
     public static boolean isArrayOfPrimitives(JsonNode array) {
         if (!array.isArray()) {
@@ -91,6 +92,8 @@ public final class ArrayEncoder {
 
     /**
      * Checks if an array contains only arrays.
+     * @param array the array to check
+     * @return true if all items in the array are arrays, false otherwise
      */
     public static boolean isArrayOfArrays(JsonNode array) {
         if (!array.isArray()) {
@@ -106,6 +109,8 @@ public final class ArrayEncoder {
 
     /**
      * Checks if an array contains only objects.
+     * @param array the array to check
+     * @return true if all items in the array are objects, false otherwise
      */
     public static boolean isArrayOfObjects(JsonNode array) {
         if (!array.isArray()) {
@@ -130,6 +135,11 @@ public final class ArrayEncoder {
 
     /**
      * Formats an inline primitive array with header and values.
+     * @param values the array of primitive values to format
+     * @param delimiter the delimiter to use between values
+     * @param prefix optional key prefix for the array
+     * @param lengthMarker whether to include the # marker before the length
+     * @return the formatted inline array string
      */
     public static String formatInlineArray(ArrayNode values, String delimiter, String prefix, boolean lengthMarker) {
         List<JsonNode> valueList = new ArrayList<>();
