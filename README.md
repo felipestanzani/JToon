@@ -361,9 +361,9 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ## Documentation
 
-- [📘 Full Documentation](documentation/) - Extended guides and references
-- [🔧 API Reference](documentation/javadoc) - Detailed Javadoc
-- [📋 Format Specification](documentation/FORMAT.md) - TOON syntax and rules
+- [📘 Full Documentation](docs/) - Extended guides and references
+- [🔧 API Reference](docs/javadoc) - Detailed Javadoc
+- [📋 Format Specification](docs/FORMAT.md) - TOON syntax and rules
 - [📜 TOON Spec](https://github.com/toon-format/spec) - Official specification
 - [🐛 Issues](https://github.com/toon-format/jtoon/issues) - Bug reports and features
 - [🤝 Contributing](CONTRIBUTING.md) - Contribution guidelines
