@@ -78,12 +78,12 @@ jacocoTestCoverageVerification {
 check.dependsOn jacocoTestReport
 
 tasks.register('generateJavadoc', Javadoc) {
-    description = 'Generates Javadoc HTML documentation in the documentation/javadoc folder'
-    group = 'documentation'
+    description = 'Generates Javadoc HTML documentation in the docs/javadoc folder'
+    group = 'docs'
     
     source = sourceSets.main.allJava
     classpath = sourceSets.main.compileClasspath
-    destinationDir = file('documentation/javadoc')
+    destinationDir = file('docs/javadoc')
     
     options.encoding = 'UTF-8'
     options.docEncoding = 'UTF-8'
