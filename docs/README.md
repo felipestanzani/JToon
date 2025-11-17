@@ -1,6 +1,6 @@
 # Documentation
 
-For a complete API documentation see the library [Javadoc](/javadoc)
+For a complete API documentation see the library [Javadoc](/JToon/javadoc)
 
 ## Type Conversions
 
