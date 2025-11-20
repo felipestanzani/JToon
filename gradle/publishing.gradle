@@ -40,9 +40,9 @@ publishing {
                 }
                 
                 scm {
-                    connection = 'scm:git:git://github.com/toon-format/toon-java/jtoon.git'
-                    developerConnection = 'scm:git:ssh://github.com:toon-format/jtoon.git'
-                    url = 'https://github.com/toon-format/toon-java/jtoon'
+                    connection = 'scm:git:git://github.com/toon-format/toon-java.git'
+                    developerConnection = 'scm:git:ssh://github.com:toon-format/toon-java.git'
+                    url = 'https://github.com/toon-format/toon-java'
                 }
             }
         }

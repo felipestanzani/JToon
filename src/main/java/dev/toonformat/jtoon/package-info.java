@@ -200,7 +200,8 @@
  * <li><a href=
  * "https://github.com/toon-format/toon-java/blob/main/TOON-SPECIFICATION.md">
  * TOON Format Specification</a></li>
- * <li><a href= "https://central.sonatype.com/artifact/toon-format/jtoon">Maven
+ * <li><a href=
+ * "https://central.sonatype.com/artifact/dev.toonformat/jtoon">Maven
  * Central</a></li>
  * </ul>
  * 
