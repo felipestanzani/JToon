@@ -1,4 +1,4 @@
-# JToon - TOON Format for Java
+# JToon – TOON Format for Java
 
 [![Build](https://github.com/toon-format/toon-java/actions/workflows/build.yml/badge.svg)](https://github.com/toon-format/toon-java/actions/workflows/build.yml)
 [![Release](https://github.com/toon-format/toon-java/actions/workflows/release.yml/badge.svg)](https://github.com/toon-format/toon-java/actions/workflows/release.yml)
@@ -64,7 +64,7 @@ Data data = new Data(user);
 System.out.println(JToon.encode(data));
 ```
 
-Output:
+**Output:**
 
 ```
 user:
@@ -96,14 +96,6 @@ Some Java-specific types are automatically normalized for LLM-safe output:
 | `Stream<T>`                 | Materialized to array                                      |
 | `Map`                       | Object with string keys                                    |
 | `Collection`, arrays        | Arrays                                                     |
-
-Number normalization examples:
-
-```
--0    → 0
-1e6   → 1000000
-1e-6  → 0.000001
-```
 
 ## API
 
