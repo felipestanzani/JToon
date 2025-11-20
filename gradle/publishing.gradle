@@ -10,12 +10,12 @@ publishing {
             pom {
                 name = 'Toon'
                 description = project.description
-                url = 'https://github.com/toon-format/jtoon'
+                url = 'https://github.com/toon-format/toon-java'
                 
                 licenses {
                     license {
                         name = 'MIT License'
-                        url = 'https://github.com/toon-format/jtoon/blob/main/LICENSE.md'
+                        url = 'https://github.com/toon-format/toon-java/blob/main/LICENSE.md'
                     }
                 }
                 
@@ -24,13 +24,25 @@ publishing {
                         id = 'felipestanzani'
                         name = 'Felipe Cesar Stanzani Fonseca'
                         email = 'stanzani@gmail.com'
+                        url = 'https://github.com/felipestanzani'
+                    }
+                    developer {
+                        id = 'jenspapenhagen'
+                        name = 'Jens Papenhagen'
+                        url='https://github.com/jenspapenhagen'
+                    }
+                    developer {
+                        id = 'koinsaari'
+                        name = 'Aaro Koinsaari'
+                        email = 'aaro.koinsaari@protonmail.ch'
+                        url = 'https://github.com/koinsaari'
                     }
                 }
                 
                 scm {
-                    connection = 'scm:git:git://github.com/toon-format/jtoon/jtoon.git'
+                    connection = 'scm:git:git://github.com/toon-format/toon-java/jtoon.git'
                     developerConnection = 'scm:git:ssh://github.com:toon-format/jtoon.git'
-                    url = 'https://github.com/toon-format/jtoon/jtoon'
+                    url = 'https://github.com/toon-format/toon-java/jtoon'
                 }
             }
         }

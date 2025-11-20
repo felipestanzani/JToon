@@ -1,7 +1,7 @@
 # JToon - TOON Format for Java
 
-[![Build](https://github.com/toon-format/jtoon/actions/workflows/build.yml/badge.svg)](https://github.com/toon-format/jtoon/actions/workflows/build.yml)
-[![Release](https://github.com/toon-format/jtoon/actions/workflows/release.yml/badge.svg)](https://github.com/toon-format/jtoon/actions/workflows/release.yml)
+[![Build](https://github.com/toon-format/toon-java/actions/workflows/build.yml/badge.svg)](https://github.com/toon-format/toon-java/actions/workflows/build.yml)
+[![Release](https://github.com/toon-format/toon-java/actions/workflows/release.yml/badge.svg)](https://github.com/toon-format/toon-java/actions/workflows/release.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/dev.toonformat/jtoon.svg)](https://central.sonatype.com/artifact/dev.toonformat/jtoon)
 ![Coverage](.github/badges/jacoco.svg)
 
@@ -47,7 +47,7 @@ dependencies {
 
 ### Alternative: Manual Installation
 
-You can also download the JAR directly from the [GitHub Releases](https://github.com/toon-format/jtoon/releases) page and add it to your project's classpath.
+You can also download the JAR directly from the [GitHub Releases](https://github.com/toon-format/toon-java/releases) page and add it to your project's classpath.
 
 ## Quick Start
 
@@ -79,23 +79,23 @@ user:
 
 Some Java-specific types are automatically normalized for LLM-safe output:
 
-| Input Type | Output |
-|---|---|
-| Number (finite) | Decimal form; `-0` → `0`; whole numbers as integers |
-| Number (`NaN`, `±Infinity`) | `null` |
-| `BigInteger` | Integer if within Long range, otherwise string (no quotes) |
-| `BigDecimal` | Decimal number |
-| `LocalDateTime` | ISO date-time string in quotes |
-| `LocalDate` | ISO date string in quotes |
-| `LocalTime` | ISO time string in quotes |
-| `ZonedDateTime` | ISO zoned date-time string in quotes |
-| `OffsetDateTime` | ISO offset date-time string in quotes |
-| `Instant` | ISO instant string in quotes |
-| `java.util.Date` | ISO instant string in quotes |
-| `Optional<T>` | Unwrapped value or `null` if empty |
-| `Stream<T>` | Materialized to array |
-| `Map` | Object with string keys |
-| `Collection`, arrays | Arrays |
+| Input Type                  | Output                                                     |
+| --------------------------- | ---------------------------------------------------------- |
+| Number (finite)             | Decimal form; `-0` → `0`; whole numbers as integers        |
+| Number (`NaN`, `±Infinity`) | `null`                                                     |
+| `BigInteger`                | Integer if within Long range, otherwise string (no quotes) |
+| `BigDecimal`                | Decimal number                                             |
+| `LocalDateTime`             | ISO date-time string in quotes                             |
+| `LocalDate`                 | ISO date string in quotes                                  |
+| `LocalTime`                 | ISO time string in quotes                                  |
+| `ZonedDateTime`             | ISO zoned date-time string in quotes                       |
+| `OffsetDateTime`            | ISO offset date-time string in quotes                      |
+| `Instant`                   | ISO instant string in quotes                               |
+| `java.util.Date`            | ISO instant string in quotes                               |
+| `Optional<T>`               | Unwrapped value or `null` if empty                         |
+| `Stream<T>`                 | Materialized to array                                      |
+| `Map`                       | Object with string keys                                    |
+| `Collection`, arrays        | Arrays                                                     |
 
 Number normalization examples:
 
@@ -362,18 +362,11 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 ## Documentation
 
 - [📘 Full Documentation](docs/) - Extended guides and references
-- [🔧 API Reference](https://felipestanzani.github.io/JToon/javadoc/) - Detailed Javadoc
+- [🔧 API Reference](https://toon-format.github.io/toon-java/javadoc/) - Detailed Javadoc
 - [📋 Format Specification](docs/FORMAT.md) - TOON syntax and rules
 - [📜 TOON Spec](https://github.com/toon-format/spec) - Official specification
-- [🐛 Issues](https://github.com/toon-format/jtoon/issues) - Bug reports and features
+- [🐛 Issues](https://github.com/toon-format/toon-java/issues) - Bug reports and features
 - [🤝 Contributing](CONTRIBUTING.md) - Contribution guidelines
-
-## Contributors
-
-- [Aaro Koinsaari](https://github.com/koinsaari)
-- [Felipe Stanzani](https://github.com/felipestanzani)
-- [Jens Papenhagen](https://github.com/jenspapenhagen)
-- [Samuel Nóbrega](https://github.com/Invokedzz)
 
 ## License
 

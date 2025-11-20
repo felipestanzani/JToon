@@ -8,7 +8,7 @@ This project uses [Gradle](https://gradle.org/) for dependency management and bu
 
 ```bash
 # Clone the repository
-git clone https://github.com/toon-format/JToon.git
+git clone https://github.com/toon-format/toon-java.git
 cd JToon
 
 # Build the project
