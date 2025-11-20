@@ -91,7 +91,7 @@ tasks.register('generateJavadoc', Javadoc) {
 }
 
 tasks.register('specsValidation', Test) {
-    description = 'Runs only a specific test class'
+    description = 'Run the schema validation test'
     group = 'verification'
 
     include '**/ConformanceTest.class'

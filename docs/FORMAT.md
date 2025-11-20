@@ -649,7 +649,7 @@ tags[3]: alpha,beta,gamma
 
 ### Mixed Array Types
 
-```python
+```json
 {
     "data": [
         {"type": "user", "id": 1},
