@@ -4,11 +4,11 @@ Thank you for your interest in contributing to the official Java implementation 
 
 ## Project Setup
 
-This project uses [Gradle](https://gradle.org/) for dependency management and build automation.
+This project uses [Gradle](https://gradle.org) for dependency management and build automation.
 
 ```bash
 # Clone the repository
-git clone https://github.com/toon-format/JToon.git
+git clone https://github.com/toon-format/toon-java.git
 cd JToon
 
 # Build the project
@@ -17,8 +17,11 @@ cd JToon
 # Run tests
 ./gradlew test
 
-# Run tests with coverage
+# Run tests with coverage report
 ./gradlew test jacocoTestReport
+
+# View coverage report
+open build/jacocoHtml/index.html
 ```
 
 ## Development Workflow
@@ -43,32 +46,48 @@ cd JToon
 
 ### Java Version Support
 
-We support Java 17 and above.
+This project targets Java 17 and above.
 
 ### Code Style
 
-- Follow Java naming conventions (camelCase for methods/variables, PascalCase for classes)
-- Keep methods focused and concise
+- Follow standard Java coding conventions
 - Use meaningful variable and method names
-- Add Javadoc comments for public APIs
+- Keep methods focused and concise
+- Add JavaDoc comments for public APIs
 - Format code consistently (use IDE auto-formatting)
 
 ### Testing
 
-- All new features must include tests
-- Maintain test coverage at **75%+ (enforced in CI)** for files and **85%+ for overall project**
+- All new features must include JUnit tests
+- Maintain test coverage at **85%+ line coverage (enforced in CI)**
 - Tests should cover edge cases and spec compliance
-- Use JUnit 5 for unit tests
 - Run the full test suite:
+  ```bash
+  ./gradlew test
+
+  # Run with coverage verification
+  ./gradlew jacocoTestCoverageVerification
+  ```
+
+### Build Tasks
+
+Common Gradle tasks you'll use:
 
 ```bash
+# Run all tests
 ./gradlew test
-```
 
-- Run with coverage report:
+# Generate coverage report
+./gradlew jacocoTestReport
 
-```bash
-./gradlew test jacocoTestReport
+# Verify coverage meets minimum thresholds
+./gradlew jacocoTestCoverageVerification
+
+# Build the project (includes tests and checks)
+./gradlew build
+
+# Clean build artifacts
+./gradlew clean
 ```
 
 ## SPEC Compliance
@@ -83,20 +102,20 @@ Before submitting changes that affect encoding/decoding behavior:
 
 ## Pull Request Guidelines
 
-- **Title:** Use a clear, descriptive title (e.g., "Add support for nested arrays", "Fix: Handle edge case in decoder")
-- **Description:** Explain what changes you made and why
-- **Tests:** Include tests for your changes
-- **Documentation:** Update README or Javadoc if needed
-- **Commits:** Use clear commit messages ([Conventional Commits](https://www.conventionalcommits.org/) preferred)
+- **Title**: Use a clear, descriptive title (e.g., "Add support for nested arrays", "Fix: Handle edge case in decoder")
+- **Description**: Explain what changes you made and why
+- **Tests**: Include tests for your changes
+- **Documentation**: Update README or JavaDoc comments if needed
+- **Commits**: Use clear commit messages ([Conventional Commits](https://www.conventionalcommits.org/) preferred)
 
 ## Communication
 
-- **GitHub Issues:** For bug reports and feature requests
-- **GitHub Discussions:** For questions and general discussion
-- **Pull Requests:** For code reviews and implementation discussion
+- **GitHub Issues**: For bug reports and feature requests
+- **GitHub Discussions**: For questions and general discussion
+- **Pull Requests**: For code reviews and implementation discussion
 - **[Discord channel](https://discord.gg/ywXDMFdx):** For direct interaction with project members
 
-## Co-Maintainers
+## Maintainers
 
 This is a collaborative project. Current maintainers:
 
