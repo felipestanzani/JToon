@@ -24,13 +24,25 @@ publishing {
                         id = 'felipestanzani'
                         name = 'Felipe Cesar Stanzani Fonseca'
                         email = 'stanzani@gmail.com'
+                        url = 'https://github.com/felipestanzani'
+                    }
+                    developer {
+                        id = 'jenspapenhagen'
+                        name = 'Jens Papenhagen'
+                        url='https://github.com/jenspapenhagen'
+                    }
+                    developer {
+                        id = 'koinsaari'
+                        name = 'Aaro Koinsaari'
+                        email = 'aaro.koinsaari@protonmail.ch'
+                        url = 'https://github.com/koinsaari'
                     }
                 }
                 
                 scm {
-                    connection = 'scm:git:git://github.com/toon-format/toon-java/jtoon.git'
+                    connection = 'scm:git:git://github.com/toon-format/toon-java.git'
                     developerConnection = 'scm:git:ssh://github.com:toon-format/toon-java.git'
-                    url = 'https://github.com/toon-format/toon-java/jtoon'
+                    url = 'https://github.com/toon-format/toon-java'
                 }
             }
         }

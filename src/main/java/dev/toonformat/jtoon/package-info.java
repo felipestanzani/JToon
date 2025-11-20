@@ -195,10 +195,14 @@
  * 
  * <h2>See Also</h2>
  * <ul>
- * <li><a href="https://github.com/toon-format/toon-java">JToon GitHub Repository</a></li>
- * <li><a href="https://github.com/toon-format/toon-java/blob/main/TOON-SPECIFICATION.md">
- *  TOON Format Specification</a></li>
- * <li><a href= "https://central.sonatype.com/artifact/toon-format/toon-java">Maven Central</a></li>
+ * <li><a href="https://github.com/toon-format/toon-java">JToon GitHub
+ * Repository</a></li>
+ * <li><a href=
+ * "https://github.com/toon-format/toon-java/blob/main/TOON-SPECIFICATION.md">
+ * TOON Format Specification</a></li>
+ * <li><a href=
+ * "https://central.sonatype.com/artifact/dev.toonformat/jtoon">Maven
+ * Central</a></li>
  * </ul>
  * 
  * @since 0.1.0

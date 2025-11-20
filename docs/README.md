@@ -1,28 +1,28 @@
 # Documentation
 
-For a complete API documentation see the library [Javadoc](/JToon/javadoc)
+For a complete API documentation see the library [Javadoc](/toon-java/javadoc)
 
 ## Type Conversions
 
 Some Java-specific types are automatically normalized for LLM-safe output:
 
-| Input Type | Output |
-|---|---|
-| Number (finite) | Decimal form; `-0` → `0`; whole numbers as integers |
-| Number (`NaN`, `±Infinity`) | `null` |
-| `BigInteger` | Integer if within Long range, otherwise string (no quotes) |
-| `BigDecimal` | Decimal number |
-| `LocalDateTime` | ISO date-time string in quotes |
-| `LocalDate` | ISO date string in quotes |
-| `LocalTime` | ISO time string in quotes |
-| `ZonedDateTime` | ISO zoned date-time string in quotes |
-| `OffsetDateTime` | ISO offset date-time string in quotes |
-| `Instant` | ISO instant string in quotes |
-| `java.util.Date` | ISO instant string in quotes |
-| `Optional<T>` | Unwrapped value or `null` if empty |
-| `Stream<T>` | Materialized to array |
-| `Map` | Object with string keys |
-| `Collection`, arrays | Arrays |
+| Input Type                  | Output                                                     |
+| --------------------------- | ---------------------------------------------------------- |
+| Number (finite)             | Decimal form; `-0` → `0`; whole numbers as integers        |
+| Number (`NaN`, `±Infinity`) | `null`                                                     |
+| `BigInteger`                | Integer if within Long range, otherwise string (no quotes) |
+| `BigDecimal`                | Decimal number                                             |
+| `LocalDateTime`             | ISO date-time string in quotes                             |
+| `LocalDate`                 | ISO date string in quotes                                  |
+| `LocalTime`                 | ISO time string in quotes                                  |
+| `ZonedDateTime`             | ISO zoned date-time string in quotes                       |
+| `OffsetDateTime`            | ISO offset date-time string in quotes                      |
+| `Instant`                   | ISO instant string in quotes                               |
+| `java.util.Date`            | ISO instant string in quotes                               |
+| `Optional<T>`               | Unwrapped value or `null` if empty                         |
+| `Stream<T>`                 | Materialized to array                                      |
+| `Map`                       | Object with string keys                                    |
+| `Collection`, arrays        | Arrays                                                     |
 
 Number normalization examples:
 
