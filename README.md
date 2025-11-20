@@ -5,7 +5,6 @@
 [![Build](https://github.com/felipestanzani/jtoon/actions/workflows/build.yml/badge.svg)](https://github.com/felipestanzani/jtoon/actions/workflows/build.yml)
 [![Release](https://github.com/felipestanzani/jtoon/actions/workflows/release.yml/badge.svg)](https://github.com/felipestanzani/jtoon/actions/workflows/release.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/com.felipestanzani/jtoon.svg)](https://central.sonatype.com/artifact/com.felipestanzani/jtoon)
-![Coverage](.github/badges/jacoco.svg)
 
 **Token-Oriented Object Notation** is a compact, human-readable format designed for passing structured data to Large Language Models with significantly reduced token usage.
 
@@ -67,7 +66,7 @@ JToon is available on Maven Central. Add it to your project using your preferred
 
 ```gradle
 dependencies {
-    implementation 'com.felipestanzani:jtoon:0.1.3'
+    implementation 'com.felipestanzani:jtoon:0.1.2'
 }
 ```
 
@@ -75,7 +74,7 @@ dependencies {
 
 ```kotlin
 dependencies {
-    implementation("com.felipestanzani:jtoon:0.1.3")
+    implementation("com.felipestanzani:jtoon:0.1.2")
 }
 ```
 
@@ -85,7 +84,7 @@ dependencies {
 <dependency>
     <groupId>com.felipestanzani</groupId>
     <artifactId>jtoon</artifactId>
-    <version>0.1.3</version>
+    <version>0.1.2</version>
 </dependency>
 ```
 
@@ -196,6 +195,10 @@ Number normalization examples:
 
 ### `JToon.encodeJson(String json, EncodeOptions options): String`
 
+### `JToon.encodeXml(String xml): String`
+
+### `JToon.encodeXml(String xml, EncodeOptions options): String`
+
 Converts any Java object or JSON-string to TOON format.
 
 **Parameters:**
@@ -209,6 +212,10 @@ Converts any Java object or JSON-string to TOON format.
 For `encodeJson` overloads:
 
 - `json` – A valid JSON string to be parsed and encoded. Invalid or blank JSON throws `IllegalArgumentException`.
+
+For `encodeXml` overloads:
+
+- `xml` – A valid XML string to be parsed and encoded. Invalid or blank XML throws `IllegalArgumentException`.
 
 **Returns:**
 
@@ -261,6 +268,58 @@ user:
   name: Ada
   tags[2]: reading,gaming
 ```
+
+#### Encode XML
+
+```java
+String xml = "<user><name>John</name><age>25</age></user>";
+System.out.println(JToon.encodeXml(xml));
+```
+
+Output:
+
+```
+user:
+  name: John
+  age: 25
+```
+
+#### XML to TOON Conversion Use Cases
+
+XML to TOON conversion is particularly useful in scenarios where:
+
+- Legacy System Integration**: Converting XML APIs or data feeds from older systems to TOON for efficient LLM processing
+- Configuration Files**: Transforming XML configuration files to TOON format for AI-assisted configuration analysis
+- Data Exchange**: Converting XML data exchange formats to TOON for reduced token usage in AI conversations
+- Log Analysis**: Processing XML formatted logs and converting them to TOON for AI-powered log analysis
+- Web Services**: Converting SOAP XML responses or REST XML payloads to TOON for AI interpretation
+
+For example, converting a complex XML document:
+```xml
+<company>
+  <name>TechCorp</name>
+  <departments>
+    <department>
+      <name>Engineering</name>
+      <employees>50</employees>
+    </department>
+    <department>
+      <name>Marketing</name>
+      <employees>20</employees>
+    </department>
+  </departments>
+</company>
+```
+
+To TOON:
+```
+company:
+  name: TechCorp
+  departments[2]{name,employees}:
+    Engineering,50
+    Marketing,20
+```
+This conversion provides significant token savings while maintaining the hierarchical structure of the original XML.
 
 #### Delimiter Options
 

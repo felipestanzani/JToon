@@ -3,8 +3,40 @@ package com.felipestanzani.jtoon;
 import com.felipestanzani.jtoon.decoder.ValueDecoder;
 import com.felipestanzani.jtoon.encoder.ValueEncoder;
 import com.felipestanzani.jtoon.normalizer.JsonNormalizer;
+import com.felipestanzani.jtoon.normalizer.XmlNormalizer;
 import tools.jackson.databind.JsonNode;
 
+/**
+ * Main API for encoding and decoding JToon format.
+ *
+ * <p>
+ * JToon is a structured text format that represents JSON-like data in a more
+ * human-readable way, with support for tabular arrays and inline formatting.
+ * </p>
+ *
+ * <h2>Usage Examples:</h2>
+ *
+ * <pre>{@code
+ * // Encode a Java object with default options
+ * String toon = JToon.encode(myObject);
+ *
+ * // Encode with custom options
+ * EncodeOptions options = new EncodeOptions(4, Delimiter.PIPE, true);
+ * String toon = JToon.encode(myObject, options);
+ *
+ * // Encode a plain JSON string directly
+ * String toon = JToon.encodeJson("{\"id\":123,\"name\":\"Ada\"}");
+ *
+ * // Encode a plain XML string directly
+ * String toon = JToon.encodeXml("<user><id>123</id><name>Ada</name></user>");
+ *
+ * // Decode TOON back to Java objects
+ * Object result = JToon.decode(toon);
+ *
+ * // Decode TOON directly to JSON string
+ * String json = JToon.decodeToJson(toon);
+ * }</pre>
+ */
 public final class JToon {
 
     private JToon() {
@@ -76,6 +108,42 @@ public final class JToon {
      */
     public static String encodeJson(String json, EncodeOptions options) {
         JsonNode parsed = JsonNormalizer.parse(json);
+        return ValueEncoder.encodeValue(parsed, options);
+    }
+
+    /**
+     * Encodes a plain XML string to TOON format using default options.
+     *
+     * <p>
+     * This is a convenience overload that parses the XML string and encodes it
+     * without requiring callers to create a {@code JsonNode} or intermediate
+     * objects.
+     * </p>
+     *
+     * @param xml The XML string to encode (must be valid XML)
+     * @return The TOON-formatted string
+     * @throws IllegalArgumentException if the input is not valid XML
+     */
+    public static String encodeXml(String xml) {
+        return encodeXml(xml, EncodeOptions.DEFAULT);
+    }
+
+    /**
+     * Encodes a plain XML string to TOON format using custom options.
+     *
+     * <p>
+     * Parsing is delegated to
+     * {@link com.felipestanzani.jtoon.normalizer.XmlNormalizer#parse(String)}
+     * to maintain separation of concerns.
+     * </p>
+     *
+     * @param xml     The XML string to encode (must be valid XML)
+     * @param options Encoding options (indent, delimiter, length marker)
+     * @return The TOON-formatted string
+     * @throws IllegalArgumentException if the input is not valid XML
+     */
+    public static String encodeXml(String xml, EncodeOptions options) {
+        JsonNode parsed = XmlNormalizer.parse(xml);
         return ValueEncoder.encodeValue(parsed, options);
     }
 
