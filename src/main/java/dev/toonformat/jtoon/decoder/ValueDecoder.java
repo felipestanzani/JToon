@@ -328,6 +328,14 @@ public final class ValueDecoder {
                     int nextDepth = getDepth(nextLine);
                     String nextContent = nextLine.substring(nextDepth * options.indent());
 
+                    if (nextDepth <= depth) {
+                        // The next line is not a child of this array,
+                        // the array is empty
+                        List<Object> empty = new ArrayList<>();
+                        validateArrayLength(header, 0);
+                        return empty;
+                    }
+
                     if (nextContent.startsWith("- ")) {
                         currentLine--;
                         return parseListArray(depth, header);
