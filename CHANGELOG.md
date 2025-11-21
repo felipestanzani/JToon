@@ -4,6 +4,29 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to Semantic Versioning and follows a Keep a Changelog-like format.
 
+## [0.1.4] - 2025-11-20
+
+### Added
+
+- Javadoc generation task (`generateJavadoc`) in build.gradle.
+- Specs validation task (`specsValidation`) for conformance testing.
+- CODE_OF_CONDUCT.md.
+- CONTRIBUTING.md.
+- GitHub templates: CODEOWNERS, ISSUE_TEMPLATE (bug_report.yml, feature_request.yml, spec_compliance.yml), PULL_REQUEST_TEMPLATE.md.
+- Documentation reorganization: moved TOON-SPECIFICATION.md to docs/FORMAT.md, added docs/README.md.
+- Javadoc HTML documentation in docs/javadoc/.
+
+### Changed
+
+- **BREAKING**: Package name migration from `com.felipestanzani.jtoon` to `dev.toonformat.jtoon`.
+- **BREAKING**: Maven group ID changed from `com.felipestanzani` to `dev.toonformat`.
+- Repository migrated from `felipestanzani/jtoon` to `toon-format/toon-java`.
+- Minimum test coverage requirement increased from 85% to 90%.
+- LICENSE.md renamed to LICENSE.
+- Updated GitHub Actions workflows (build.yml, release.yml).
+- Updated Gradle wrapper.
+- Updated dependency: `actions/github-script` from 6 to 8.
+
 ## [0.1.3] - 2025-11-14
 
 ### Added
@@ -52,6 +75,7 @@ This project adheres to Semantic Versioning and follows a Keep a Changelog-like 
 - Delimiter options (comma, tab, pipe) and optional length marker.
 - Comprehensive README with specification overview and examples.
 
+[0.1.4]: https://github.com/toon-format/toon-java/releases/tag/v0.1.4
 [0.1.3]: https://github.com/toon-format/toon-java/releases/tag/v0.1.3
 [0.1.2]: https://github.com/toon-format/toon-java/releases/tag/v0.1.2
 [0.1.1]: https://github.com/toon-format/toon-java/releases/tag/v0.1.1
