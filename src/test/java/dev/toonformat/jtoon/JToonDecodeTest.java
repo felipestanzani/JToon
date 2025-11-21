@@ -96,10 +96,10 @@ public class JToonDecodeTest {
         @DisplayName("should decode simple object")
         void testSimpleObject() {
             String toon = """
-                id: 123
-                name: Ada
-                active: true
-                """;
+                    id: 123
+                    name: Ada
+                    active: true
+                    """;
             Object result = JToon.decode(toon);
             @SuppressWarnings("unchecked")
             Map<String, Object> map = (Map<String, Object>) result;
@@ -137,10 +137,10 @@ public class JToonDecodeTest {
         @DisplayName("should decode nested object")
         void testNestedObject() {
             String toon = """
-                user:
-                  id: 123
-                  name: Ada
-                """;
+                    user:
+                      id: 123
+                      name: Ada
+                    """;
             Object result = JToon.decode(toon);
             @SuppressWarnings("unchecked")
             Map<String, Object> map = (Map<String, Object>) result;
@@ -154,12 +154,12 @@ public class JToonDecodeTest {
         @DisplayName("should decode deeply nested object")
         void testDeeplyNestedObject() {
             String toon = """
-                user:
-                  id: 123
-                  contact:
-                    email: ada@example.com
-                    phone: "555-1234"
-                """;
+                    user:
+                      id: 123
+                      contact:
+                        email: ada@example.com
+                        phone: "555-1234"
+                    """;
             Object result = JToon.decode(toon);
             @SuppressWarnings("unchecked")
             Map<String, Object> map = (Map<String, Object>) result;
@@ -195,9 +195,9 @@ public class JToonDecodeTest {
         @DisplayName("should decode multiline primitive array")
         void testMultilinePrimitiveArray() {
             String toon = """
-                tags[3]:
-                  reading,gaming,coding
-                """;
+                    tags[3]:
+                      reading,gaming,coding
+                    """;
             Object result = JToon.decode(toon);
             @SuppressWarnings("unchecked")
             Map<String, Object> map = (Map<String, Object>) result;
@@ -245,10 +245,10 @@ public class JToonDecodeTest {
         @DisplayName("should decode tabular array")
         void testTabularArray() {
             String toon = """
-                users[2]{id,name,role}:
-                  1,Alice,admin
-                  2,Bob,user
-                """;
+                    users[2]{id,name,role}:
+                      1,Alice,admin
+                      2,Bob,user
+                    """;
             Object result = JToon.decode(toon);
             @SuppressWarnings("unchecked")
             Map<String, Object> map = (Map<String, Object>) result;
@@ -273,10 +273,10 @@ public class JToonDecodeTest {
         @DisplayName("should decode tabular array with mixed types")
         void testTabularArrayMixedTypes() {
             String toon = """
-                items[2]{sku,qty,price}:
-                  A1,2,9.99
-                  B2,1,14.5
-                """;
+                    items[2]{sku,qty,price}:
+                      A1,2,9.99
+                      B2,1,14.5
+                    """;
             Object result = JToon.decode(toon);
             @SuppressWarnings("unchecked")
             Map<String, Object> map = (Map<String, Object>) result;
@@ -294,10 +294,10 @@ public class JToonDecodeTest {
         @DisplayName("should decode tabular array with quoted values")
         void testTabularArrayQuotedValues() {
             String toon = """
-                items[2]{id,name}:
-                  1,"First Item"
-                  2,"Second, Item"
-                """;
+                    items[2]{id,name}:
+                      1,"First Item"
+                      2,"Second, Item"
+                    """;
             Object result = JToon.decode(toon);
             @SuppressWarnings("unchecked")
             Map<String, Object> map = (Map<String, Object>) result;
@@ -318,10 +318,10 @@ public class JToonDecodeTest {
         @DisplayName("should decode list array with simple items")
         void testSimpleListArray() {
             String toon = """
-                items[2]:
-                  - first
-                  - second
-                """;
+                    items[2]:
+                      - first
+                      - second
+                    """;
             Object result = JToon.decode(toon);
             @SuppressWarnings("unchecked")
             Map<String, Object> map = (Map<String, Object>) result;
@@ -335,12 +335,12 @@ public class JToonDecodeTest {
         @DisplayName("should decode list array with object items")
         void testListArrayWithObjects() {
             String toon = """
-                items[2]:
-                  - id: 1
-                    name: First
-                  - id: 2
-                    name: Second
-                """;
+                    items[2]:
+                      - id: 1
+                        name: First
+                      - id: 2
+                        name: Second
+                    """;
             Object result = JToon.decode(toon);
             @SuppressWarnings("unchecked")
             Map<String, Object> map = (Map<String, Object>) result;
@@ -413,11 +413,11 @@ public class JToonDecodeTest {
         @DisplayName("should decode object with nested arrays")
         void testObjectWithNestedArrays() {
             String toon = """
-                user:
-                  id: 123
-                  name: Ada
-                  tags[2]: dev,admin
-                """;
+                    user:
+                      id: 123
+                      name: Ada
+                      tags[2]: dev,admin
+                    """;
             Object result = JToon.decode(toon);
             @SuppressWarnings("unchecked")
             Map<String, Object> map = (Map<String, Object>) result;
@@ -432,10 +432,10 @@ public class JToonDecodeTest {
         @DisplayName("should decode array of nested objects")
         void testArrayOfNestedObjects() {
             String toon = """
-                users[2]{id,name}:
-                  1,Alice
-                  2,Bob
-                """;
+                    users[2]{id,name}:
+                      1,Alice
+                      2,Bob
+                    """;
             Object result = JToon.decode(toon);
             @SuppressWarnings("unchecked")
             Map<String, Object> map = (Map<String, Object>) result;
@@ -448,11 +448,11 @@ public class JToonDecodeTest {
         @DisplayName("should decode mixed content at root level")
         void testMixedRootContent() {
             String toon = """
-                id: 123
-                name: Ada
-                tags[2]: dev,admin
-                active: true
-                """;
+                    id: 123
+                    name: Ada
+                    tags[2]: dev,admin
+                    active: true
+                    """;
             Object result = JToon.decode(toon);
             @SuppressWarnings("unchecked")
             Map<String, Object> map = (Map<String, Object>) result;
@@ -503,9 +503,9 @@ public class JToonDecodeTest {
         @DisplayName("should decode to JSON string")
         void testDecodeToJson() {
             String toon = """
-                id: 123
-                name: Ada
-                """;
+                    id: 123
+                    name: Ada
+                    """;
             String json = JToon.decodeToJson(toon);
             assertNotNull(json);
             assertTrue(json.contains("123"));
@@ -516,15 +516,67 @@ public class JToonDecodeTest {
         @DisplayName("should decode complex structure to JSON")
         void testComplexDecodeToJson() {
             String toon = """
-                users[2]{id,name}:
-                  1,Alice
-                  2,Bob
-                """;
+                    users[2]{id,name}:
+                      1,Alice
+                      2,Bob
+                    """;
             String json = JToon.decodeToJson(toon);
             assertNotNull(json);
             assertTrue(json.contains("users"));
             assertTrue(json.contains("Alice"));
             assertTrue(json.contains("Bob"));
+        }
+
+        @Test
+        @DisplayName("should decode very complex structure to JSON, with empty Lists")
+        void testVeryComplexDecodeToJson() {
+            String toon = """
+                    [2]:
+                      - name: Person.java
+                        absolutePath: /Users/samples/petclinic/model/Person.java
+                        types[1]:
+                          - name: Person
+                            lineNumber: 29
+                            fields[2]{name,lineNumber}:
+                              firstName,33
+                              lastName,37
+                            members[2]:
+                              - name: getFirstName
+                                readFields[1]{name,lineNumber}:
+                                  firstName,40
+                                calledMethods[0]:
+                                writtenFields[0]:
+                                lineNumber: 39
+                                signature: getFirstName()
+                              - name: setFirstName
+                                readFields[0]:
+                                calledMethods[0]:
+                                writtenFields[1]{name,lineNumber}:
+                                  firstName,44
+                                lineNumber: 43
+                                signature: setFirstName(java.lang.String)
+                      - name: NamedEntity.java
+                        absolutePath: /Users/samples/petclinic/model/NamedEntity.java
+                        types[1]:
+                          - name: NamedEntity
+                            lineNumber: 32
+                            fields[1]{name,lineNumber}:
+                              name,36
+                            members[1]:
+                              - name: toString
+                                readFields[3]{name,lineNumber}:
+                                  address,154
+                                  telephone,156
+                                  city,155
+                                calledMethods[1]{name,lineNumber,signature}:
+                                  getFirstName,153,getFirstName
+                                writtenFields[0]:
+                                lineNumber: 47
+                                signature: toString()
+                    """;
+            String json = JToon.decodeToJson(toon);
+            assertNotNull(json);
+            assertTrue(json.contains("petclinic"));
         }
     }
 }
