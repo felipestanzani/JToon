@@ -126,7 +126,7 @@ public final class JToon {
      * <p>
      * This method is a convenience wrapper around
      * {@link #decode(String)} and expects the decoded result to
-     * represent a TOON object. If the decoded value is {@code null} or a {@code String},
+     * represent a TOON object. If the decoded value is {@code null} or an invalid {@code String},
      * an empty map is returned. No deep transformation is applied: the returned map
      * directly reflects the structure produced by the decoder.
      * </p>
@@ -151,9 +151,14 @@ public final class JToon {
      * <p>
      * This method is a convenience wrapper around
      * {@link #decode(String, DecodeOptions)} and expects the decoded result to
-     * represent a TOON object. If the decoded value is {@code null} or a {@code String},
+     * represent a TOON object. If the decoded value is {@code null} or an invalid {@code String},
      * an empty map is returned. No deep transformation is applied: the returned map
      * directly reflects the structure produced by the decoder.
+     * </p>
+     *
+     * <p>
+     * The decoded value must be a {@code Map}; otherwise, a {@link ClassCastException}
+     * will occur due to the unchecked cast.
      * </p>
      *
      * @param toon    The TOON-formatted string to decode
@@ -162,7 +167,6 @@ public final class JToon {
      *         input decodes to {@code null} or a {@code String}
      * @throws IllegalArgumentException if strict mode is enabled and the input is invalid
      */
-
     @SuppressWarnings("unchecked")
     public static Map<String, Object> decodeToMap(String toon, DecodeOptions options) {
         Object result = decode(toon, options);
