@@ -139,10 +139,8 @@ public final class ObjectEncoder {
             ArrayEncoder.encodeArray(key, (ArrayNode) value, writer, depth, options);
         } else if (value.isObject()) {
             ObjectNode objValue = (ObjectNode) value;
-            if (objValue.isEmpty()) {
-                writer.push(depth, encodedKey + COLON);
-            } else {
-                writer.push(depth, encodedKey + COLON);
+            writer.push(depth, encodedKey + COLON);
+            if (!objValue.isEmpty()) {
                 encodeObject(objValue, writer, depth + 1, options, rootLiteralKeys, currentPath, effectiveFlattenDepth);
             }
         }
