@@ -4,7 +4,7 @@
   "description": "Strict mode indentation validation - non-multiple indentation, tab characters, custom indent sizes",
   "tests": [
     {
-      "name": "throws when object field has non-multiple indentation (3 spaces with indent=2)",
+      "name": "throws on object field with non-multiple indentation (3 spaces with indent=2)",
       "input": "a:\n   b: 1",
       "expected": null,
       "shouldError": true,
@@ -15,7 +15,7 @@
       "specSection": "14.3"
     },
     {
-      "name": "throws when list item has non-multiple indentation (3 spaces with indent=2)",
+      "name": "throws on list item with non-multiple indentation (3 spaces with indent=2)",
       "input": "items[2]:\n   - id: 1\n   - id: 2",
       "expected": null,
       "shouldError": true,
@@ -26,7 +26,7 @@
       "specSection": "14.3"
     },
     {
-      "name": "throws with custom indent size when non-multiple (3 spaces with indent=4)",
+      "name": "throws on non-multiple indentation with custom indent=4 (3 spaces)",
       "input": "a:\n   b: 1",
       "expected": null,
       "shouldError": true,
@@ -51,7 +51,7 @@
       "specSection": "12"
     },
     {
-      "name": "throws when tab character used in indentation",
+      "name": "throws on tab character used in indentation",
       "input": "a:\n\tb: 1",
       "expected": null,
       "shouldError": true,
@@ -61,7 +61,7 @@
       "specSection": "14.3"
     },
     {
-      "name": "throws when mixed tabs and spaces in indentation",
+      "name": "throws on mixed tabs and spaces in indentation",
       "input": "a:\n \tb: 1",
       "expected": null,
       "shouldError": true,
@@ -71,7 +71,7 @@
       "specSection": "14.3"
     },
     {
-      "name": "throws when tab at start of line",
+      "name": "throws on tab at start of line",
       "input": "\ta: 1",
       "expected": null,
       "shouldError": true,
@@ -144,7 +144,7 @@
       "specSection": "12"
     },
     {
-      "name": "empty lines do not trigger validation errors",
+      "name": "parses empty lines without validation errors",
       "input": "a: 1\n\nb: 2",
       "expected": {
         "a": 1,
@@ -156,7 +156,7 @@
       "specSection": "12"
     },
     {
-      "name": "root-level content (0 indentation) is always valid",
+      "name": "parses root-level content (0 indentation) as always valid",
       "input": "a: 1\nb: 2\nc: 3",
       "expected": {
         "a": 1,
@@ -169,7 +169,7 @@
       "specSection": "12"
     },
     {
-      "name": "lines with only spaces are not validated if empty",
+      "name": "parses lines with only spaces without validation if empty",
       "input": "a: 1\n   \nb: 2",
       "expected": {
         "a": 1,

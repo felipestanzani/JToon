@@ -66,7 +66,7 @@
       "specSection": "11"
     },
     {
-      "name": "nested arrays inside list items default to comma delimiter",
+      "name": "parses nested arrays inside list items with default comma delimiter",
       "input": "items[1\t]:\n  - tags[3]: a,b,c",
       "expected": {
         "items": [{ "tags": ["a", "b", "c"] }]
@@ -75,7 +75,7 @@
       "note": "Parent uses tab, nested defaults to comma"
     },
     {
-      "name": "nested arrays inside list items default to comma with pipe parent",
+      "name": "parses nested arrays inside list items with default comma delimiter when parent uses pipe",
       "input": "items[1|]:\n  - tags[3]: a,b,c",
       "expected": {
         "items": [{ "tags": ["a", "b", "c"] }]
@@ -83,25 +83,25 @@
       "specSection": "11"
     },
     {
-      "name": "parses root arrays with tab delimiter",
+      "name": "parses root-level array with tab delimiter",
       "input": "[3\t]: x\ty\tz",
       "expected": ["x", "y", "z"],
       "specSection": "11"
     },
     {
-      "name": "parses root arrays with pipe delimiter",
+      "name": "parses root-level array with pipe delimiter",
       "input": "[3|]: x|y|z",
       "expected": ["x", "y", "z"],
       "specSection": "11"
     },
     {
-      "name": "parses root arrays of objects with tab delimiter",
+      "name": "parses root-level array of objects with tab delimiter",
       "input": "[2\t]{id}:\n  1\n  2",
       "expected": [{ "id": 1 }, { "id": 2 }],
       "specSection": "11"
     },
     {
-      "name": "parses root arrays of objects with pipe delimiter",
+      "name": "parses root-level array of objects with pipe delimiter",
       "input": "[2|]{id}:\n  1\n  2",
       "expected": [{ "id": 1 }, { "id": 2 }],
       "specSection": "11"

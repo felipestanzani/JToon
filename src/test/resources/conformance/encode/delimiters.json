@@ -87,7 +87,7 @@
       "specSection": "11"
     },
     {
-      "name": "encodes root arrays with tab delimiter",
+      "name": "encodes root-level array with tab delimiter",
       "input": ["x", "y", "z"],
       "expected": "[3\t]: x\ty\tz",
       "options": {
@@ -96,7 +96,7 @@
       "specSection": "11"
     },
     {
-      "name": "encodes root arrays with pipe delimiter",
+      "name": "encodes root-level array with pipe delimiter",
       "input": ["x", "y", "z"],
       "expected": "[3|]: x|y|z",
       "options": {
@@ -105,7 +105,7 @@
       "specSection": "11"
     },
     {
-      "name": "encodes root arrays of objects with tab delimiter",
+      "name": "encodes root-level array of objects with tab delimiter",
       "input": [{ "id": 1 }, { "id": 2 }],
       "expected": "[2\t]{id}:\n  1\n  2",
       "options": {
@@ -114,7 +114,7 @@
       "specSection": "11"
     },
     {
-      "name": "encodes root arrays of objects with pipe delimiter",
+      "name": "encodes root-level array of objects with pipe delimiter",
       "input": [{ "id": 1 }, { "id": 2 }],
       "expected": "[2|]{id}:\n  1\n  2",
       "options": {

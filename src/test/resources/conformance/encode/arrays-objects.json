@@ -27,17 +27,17 @@
     {
       "name": "preserves field order in list items - array first",
       "input": {
-        "items": [{ "nums": [1, 2, 3], "name": "test" }]
+        "items": [{ "nums": [1, 2, 3], "name": "Ada" }]
       },
-      "expected": "items[1]:\n  - nums[3]: 1,2,3\n    name: test",
+      "expected": "items[1]:\n  - nums[3]: 1,2,3\n    name: Ada",
       "specSection": "10"
     },
     {
       "name": "preserves field order in list items - primitive first",
       "input": {
-        "items": [{ "name": "test", "nums": [1, 2, 3] }]
+        "items": [{ "name": "Ada", "nums": [1, 2, 3] }]
       },
-      "expected": "items[1]:\n  - name: test\n    nums[3]: 1,2,3",
+      "expected": "items[1]:\n  - name: Ada\n    nums[3]: 1,2,3",
       "specSection": "10"
     },
     {
@@ -90,10 +90,10 @@
       "name": "encodes objects with empty arrays in list format",
       "input": {
         "items": [
-          { "name": "test", "data": [] }
+          { "name": "Ada", "data": [] }
         ]
       },
-      "expected": "items[1]:\n  - name: test\n    data[0]:",
+      "expected": "items[1]:\n  - name: Ada\n    data[0]:",
       "specSection": "10"
     },
     {
@@ -124,7 +124,7 @@
       "specSection": "9.3"
     },
     {
-      "name": "uses list format when one object has nested column",
+      "name": "uses list format when one object has nested field",
       "input": {
         "items": [
           { "id": 1, "data": "string" },

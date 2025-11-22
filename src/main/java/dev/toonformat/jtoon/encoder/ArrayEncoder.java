@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.StreamSupport;
 
-import static dev.toonformat.jtoon.util.Constants.*;
+import static dev.toonformat.jtoon.util.Constants.LIST_ITEM_PREFIX;
+import static dev.toonformat.jtoon.util.Constants.SPACE;
 
 /**
  * Handles encoding of JSON arrays to TOON format.
@@ -75,6 +76,7 @@ public final class ArrayEncoder {
 
     /**
      * Checks if an array contains only primitive values.
+     *
      * @param array for testing that all items are primitives
      * @return true if all items in the array are primitive values, false otherwise
      */
@@ -92,6 +94,7 @@ public final class ArrayEncoder {
 
     /**
      * Checks if an array contains only arrays.
+     *
      * @param array the array to check
      * @return true if all items in the array are arrays, false otherwise
      */
@@ -109,6 +112,7 @@ public final class ArrayEncoder {
 
     /**
      * Checks if an array contains only objects.
+     *
      * @param array the array to check
      * @return true if all items in the array are objects, false otherwise
      */
@@ -128,16 +132,17 @@ public final class ArrayEncoder {
      * Encodes a primitive array inline: key[N]: v1,v2,v3
      */
     private static void encodeInlinePrimitiveArray(String prefix, ArrayNode values, LineWriter writer, int depth,
-            EncodeOptions options) {
+                                                   EncodeOptions options) {
         String formatted = formatInlineArray(values, options.delimiter().getValue(), prefix, options.lengthMarker());
         writer.push(depth, formatted);
     }
 
     /**
      * Formats an inline primitive array with header and values.
-     * @param values the array of primitive values to format
-     * @param delimiter the delimiter to use between values
-     * @param prefix optional key prefix for the array
+     *
+     * @param values       the array of primitive values to format
+     * @param delimiter    the delimiter to use between values
+     * @param prefix       optional key prefix for the array
      * @param lengthMarker whether to include the # marker before the length
      * @return the formatted inline array string
      */
@@ -159,7 +164,7 @@ public final class ArrayEncoder {
      * Encodes an array of primitive arrays as list items.
      */
     private static void encodeArrayOfArraysAsListItems(String prefix, ArrayNode values, LineWriter writer, int depth,
-            EncodeOptions options) {
+                                                       EncodeOptions options) {
         String header = PrimitiveEncoder.formatHeader(values.size(), prefix, null, options.delimiter().getValue(),
                 options.lengthMarker());
         writer.push(depth, header);
@@ -176,8 +181,11 @@ public final class ArrayEncoder {
     /**
      * Encodes a mixed array (non-uniform) as list items.
      */
-    private static void encodeMixedArrayAsListItems(String prefix, ArrayNode items, LineWriter writer, int depth,
-            EncodeOptions options) {
+    private static void encodeMixedArrayAsListItems(String prefix,
+                                                    ArrayNode items,
+                                                    LineWriter writer,
+                                                    int depth,
+                                                    EncodeOptions options) {
         String header = PrimitiveEncoder.formatHeader(items.size(), prefix, null, options.delimiter().getValue(),
                 options.lengthMarker());
         writer.push(depth, header);
@@ -193,6 +201,15 @@ public final class ArrayEncoder {
                     String inline = formatInlineArray((ArrayNode) item, options.delimiter().getValue(), null,
                             options.lengthMarker());
                     writer.push(depth + 1, LIST_ITEM_PREFIX + inline);
+                }
+                if (isArrayOfObjects(item)) {
+                    ArrayNode arrayItems = (ArrayNode) item;
+                    String nestedHeader = PrimitiveEncoder.formatHeader(arrayItems.size(), null, null,
+                            options.delimiter().getValue(), options.lengthMarker());
+                    writer.push(depth + 1, LIST_ITEM_PREFIX + nestedHeader);
+
+                    arrayItems.elements()
+                            .forEach(e -> ListItemEncoder.encodeObjectAsListItem((ObjectNode) e, writer, depth + 2, options));
                 }
             } else if (item.isObject()) {
                 // Object as list item - delegate to ListItemEncoder

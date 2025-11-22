@@ -49,7 +49,7 @@
       "specSection": "12"
     },
     {
-      "name": "empty tokens decode to empty string",
+      "name": "parses empty tokens as empty string",
       "input": "items[3]: a,,c",
       "expected": {
         "items": ["a", "", "c"]
