@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class JToonDecodeToMapTest {
 
     @Test
-    @DisplayName("should return a Map<String, Object>")
+    @DisplayName("should return a non-empty Map")
     void simpleMapDecode() {
         String toon = """
                     id: 123
@@ -20,15 +20,19 @@ public class JToonDecodeToMapTest {
                     active: true
                     """;
         Map<String, Object> map = JToon.decodeToMap(toon);
+
         assertNotNull(map);
         assertFalse(map.isEmpty());
         assertNotNull(map.get("id"));
         assertNotNull(map.get("name"));
         assertNotNull(map.get("active"));
+        assertEquals(123L, map.get("id"));
+        assertEquals("Ada", map.get("name"));
+        assertEquals(true, map.get("active"));
     }
 
     @Test
-    @DisplayName("if the given input is null an empty Map is returned")
+    @DisplayName("should return an empty Map for null input")
     void nullInput() {
         Map<String, Object> map = JToon.decodeToMap(null);
         assertNotNull(map);
@@ -36,8 +40,8 @@ public class JToonDecodeToMapTest {
     }
 
     @Test
-    @DisplayName("if the given input is an invalid toon string, and empty Map is returned")
-    void nullResult() {
+    @DisplayName("should return an empty Map for invalid TOON string")
+    void invalidInput() {
         String toon = "This String is invalid";
         Map<String, Object> map = JToon.decodeToMap(toon);
         assertNotNull(map);
