@@ -103,8 +103,9 @@ public class ConformanceTest {
             }
 
             boolean lengthMarker = options.lengthMarker() != null && "#".equals(options.lengthMarker());
-
-            return new EncodeOptions(indent, delimiter, lengthMarker);
+            boolean flatten = options.keyFolding() != null && "safe".equals(options.keyFolding());
+            int depth = options.flattenDepth() != null ? options.flattenDepth() : Integer.MAX_VALUE;
+            return new EncodeOptions(indent, delimiter, lengthMarker, flatten, depth);
         }
 
         private record EncodeTestFile(File file, EncodeTestFixture fixture) {

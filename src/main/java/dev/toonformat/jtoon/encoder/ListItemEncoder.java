@@ -6,7 +6,9 @@ import tools.jackson.databind.node.ArrayNode;
 import tools.jackson.databind.node.ObjectNode;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static dev.toonformat.jtoon.util.Constants.*;
 
@@ -46,7 +48,7 @@ public final class ListItemEncoder {
         // Remaining keys on indented lines
         for (int i = 1; i < keys.size(); i++) {
             String key = keys.get(i);
-            ObjectEncoder.encodeKeyValuePair(key, obj.get(key), writer, depth + 1, options);
+            ObjectEncoder.encodeKeyValuePair(key, obj.get(key), writer, depth + 1, options, new HashSet<>(keys), Set.of(), null, null);
         }
     }
 
@@ -55,7 +57,7 @@ public final class ListItemEncoder {
      * Handles special formatting for arrays and objects.
      */
     private static void encodeFirstKeyValue(String key, JsonNode value, LineWriter writer, int depth,
-            EncodeOptions options) {
+                                            EncodeOptions options) {
         String encodedKey = PrimitiveEncoder.encodeKey(key);
 
         if (value.isValueNode()) {
@@ -68,13 +70,13 @@ public final class ListItemEncoder {
     }
 
     private static void encodeFirstValueAsPrimitive(String encodedKey, JsonNode value, LineWriter writer, int depth,
-            EncodeOptions options) {
+                                                    EncodeOptions options) {
         writer.push(depth, LIST_ITEM_PREFIX + encodedKey + COLON + SPACE
                 + PrimitiveEncoder.encodePrimitive(value, options.delimiter().getValue()));
     }
 
     private static void encodeFirstValueAsArray(String key, String encodedKey, ArrayNode arrayValue, LineWriter writer,
-            int depth, EncodeOptions options) {
+                                                int depth, EncodeOptions options) {
         if (ArrayEncoder.isArrayOfPrimitives(arrayValue)) {
             encodeFirstArrayAsPrimitives(key, arrayValue, writer, depth, options);
         } else if (ArrayEncoder.isArrayOfObjects(arrayValue)) {
@@ -85,14 +87,14 @@ public final class ListItemEncoder {
     }
 
     private static void encodeFirstArrayAsPrimitives(String key, ArrayNode arrayValue, LineWriter writer, int depth,
-            EncodeOptions options) {
+                                                     EncodeOptions options) {
         String formatted = ArrayEncoder.formatInlineArray(arrayValue, options.delimiter().getValue(), key,
                 options.lengthMarker());
         writer.push(depth, LIST_ITEM_PREFIX + formatted);
     }
 
     private static void encodeFirstArrayAsObjects(String key, String encodedKey, ArrayNode arrayValue,
-            LineWriter writer, int depth, EncodeOptions options) {
+                                                  LineWriter writer, int depth, EncodeOptions options) {
         List<String> header = TabularArrayEncoder.detectTabularHeader(arrayValue);
         if (!header.isEmpty()) {
             String headerStr = PrimitiveEncoder.formatHeader(arrayValue.size(), key, header,
@@ -112,7 +114,7 @@ public final class ListItemEncoder {
     }
 
     private static void encodeFirstArrayAsComplex(String encodedKey, ArrayNode arrayValue, LineWriter writer, int depth,
-            EncodeOptions options) {
+                                                  EncodeOptions options) {
         writer.push(depth, LIST_ITEM_PREFIX + encodedKey + OPEN_BRACKET + arrayValue.size() + CLOSE_BRACKET + COLON);
 
         for (JsonNode item : arrayValue) {
@@ -130,10 +132,10 @@ public final class ListItemEncoder {
     }
 
     private static void encodeFirstValueAsObject(String encodedKey, ObjectNode nestedObj, LineWriter writer, int depth,
-            EncodeOptions options) {
+                                                 EncodeOptions options) {
         writer.push(depth, LIST_ITEM_PREFIX + encodedKey + COLON);
         if (!nestedObj.isEmpty()) {
-            ObjectEncoder.encodeObject(nestedObj, writer, depth + 2, options);
+            ObjectEncoder.encodeObject(nestedObj, writer, depth + 2, options, Set.of(), null, null);
         }
     }
 }

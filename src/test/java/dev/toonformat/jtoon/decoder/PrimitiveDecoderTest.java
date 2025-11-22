@@ -7,16 +7,14 @@ import org.junit.jupiter.api.Test;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit tests for PrimitiveDecoder utility class.
  * Tests decoding of primitive values, keys, and header formatting.
  */
 @Tag("unit")
-public class PrimitiveDecoderTest {
+class PrimitiveDecoderTest {
 
     @Test
     @DisplayName("throws unsupported Operation Exception for calling the constructor")
@@ -30,5 +28,177 @@ public class PrimitiveDecoderTest {
         final Throwable cause = thrown.getCause();
         assertInstanceOf(UnsupportedOperationException.class, cause);
         assertEquals("Utility class cannot be instantiated", cause.getMessage());
+    }
+
+    @Test
+    void givenNullInput_whenParse_thenReturnsEmptyString() {
+        // Given
+        String input = null;
+
+        // When
+        Object result = PrimitiveDecoder.parse(input);
+
+        // Then
+        assertEquals("", result);
+    }
+
+    @Test
+    void givenEmptyInput_whenParse_thenReturnsEmptyString() {
+        // Given
+        String input = "";
+
+        // When
+        Object result = PrimitiveDecoder.parse(input);
+
+        // Then
+        assertEquals("", result);
+    }
+
+    @Test
+    void givenNullLiteral_whenParse_thenReturnsNull() {
+        // Given
+        String input = "null";
+
+        // When
+        Object result = PrimitiveDecoder.parse(input);
+
+        // Then
+        assertNull(result);
+    }
+
+    @Test
+    void givenTrueLiteral_whenParse_thenReturnsBooleanTrue() {
+        // Given
+        String input = "true";
+
+        // When
+        Object result = PrimitiveDecoder.parse(input);
+
+        // Then
+        assertEquals(true, result);
+    }
+
+    @Test
+    void givenFalseLiteral_whenParse_thenReturnsBooleanFalse() {
+        // Given
+        String input = "false";
+
+        // When
+        Object result = PrimitiveDecoder.parse(input);
+
+        // Then
+        assertEquals(false, result);
+    }
+
+
+    @Test
+    void givenQuotedString_whenParse_thenReturnsUnescapedString() {
+        // Given
+        String input = "\"hello\\nworld\"";
+
+
+        // When
+        Object result = PrimitiveDecoder.parse(input);
+
+        // Then
+        assertEquals("hello\nworld", result);
+
+    }
+
+    @Test
+    void givenOctalLikeNumber_whenParse_thenReturnsString() {
+        // Given
+        String input = "0123"; // starts with "0" + non-decimal
+
+        // When
+        Object result = PrimitiveDecoder.parse(input);
+
+        // Then
+        assertEquals("0123", result);
+    }
+
+    @Test
+    void givenZeroOrExplicitZeroFormats_whenParse_thenParsesAsNumber() {
+        // Given
+        String input = "0.0";
+
+        // When
+        Object result = PrimitiveDecoder.parse(input);
+
+        // Then
+        assertEquals(0L, result);  // negative/positive zero → 0L
+    }
+
+    @Test
+    void givenIntegerString_whenParse_thenReturnsLong() {
+        // Given
+        String input = "42";
+
+        // When
+        Object result = PrimitiveDecoder.parse(input);
+
+        // Then
+        assertEquals(42L, result);
+    }
+
+
+    @Test
+    void givenDecimalNumber_whenParse_thenReturnsDouble() {
+        // Given
+        String input = "3.14";
+
+        // When
+        Object result = PrimitiveDecoder.parse(input);
+
+        // Then
+        assertEquals(3.14, (Double) result, 0.000001);
+    }
+
+    @Test
+    void givenExponentNumber_whenParse_thenReturnsLong() {
+        // Given
+        String input = "1e3";
+
+        // When
+        Object result = PrimitiveDecoder.parse(input);
+
+        // Then
+        assertEquals(1000.0, (Long) result, 0.000001);
+    }
+
+    @Test
+    void givenDoubleRepresentingWholeNumber_whenParse_thenReturnsLong() {
+        // Given
+        String input = "42.0";
+
+        // When
+        Object result = PrimitiveDecoder.parse(input);
+
+        // Then
+        assertEquals(42L, result); // should convert to Long
+    }
+
+    @Test
+    void givenNegativeZeroDouble_whenParse_thenReturnsZeroLong() {
+        // Given
+        String input = "-0.0";
+
+        // When
+        Object result = PrimitiveDecoder.parse(input);
+
+        // Then
+        assertEquals(0L, result);
+    }
+
+    @Test
+    void givenInvalidNumber_whenParse_thenReturnsOriginalString() {
+        // Given
+        String input = "123abc";
+
+        // When
+        Object result = PrimitiveDecoder.parse(input);
+
+        // Then
+        assertEquals("123abc", result);
     }
 }

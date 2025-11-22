@@ -54,16 +54,22 @@
       "specSection": "9.4"
     },
     {
-      "name": "encodes empty root-level array",
-      "input": [],
-      "expected": "[0]:",
-      "specSection": "9.1"
+      "name": "encodes root-level array mixing primitive, object, and array of objects in list format",
+      "input": ["summary", { "id": 1, "name": "Ada" }, [{ "id": 2 }, { "status": "draft" }]],
+      "expected": "[3]:\n  - summary\n  - id: 1\n    name: Ada\n  - [2]:\n    - id: 2\n    - status: draft",
+      "specSection": "9.4"
     },
     {
       "name": "encodes root-level arrays of arrays",
       "input": [[1, 2], []],
       "expected": "[2]:\n  - [2]: 1,2\n  - [0]:",
       "specSection": "9.2"
+    },
+    {
+      "name": "encodes empty root-level array",
+      "input": [],
+      "expected": "[0]:",
+      "specSection": "9.1"
     },
     {
       "name": "encodes complex nested structure",
